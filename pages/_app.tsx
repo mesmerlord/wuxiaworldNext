@@ -1,30 +1,22 @@
 import { AppProps } from 'next/app';
-import Head from 'next/head';
-import { MantineProvider, NormalizeCSS, GlobalStyles } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
+import { useHydrate } from '../components/Store/Store';
+import { StoreProvider } from '../components/Store/StoreProvider';
+import React from 'react';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 
-export default function App(props: AppProps) {
+const App = (props: AppProps) => {
   const { Component, pageProps } = props;
+  const store = useHydrate(pageProps.initialZustandState);
+  const [queryClient] = React.useState(() => new QueryClient());
 
   return (
-    <>
-      <Head>
-        <title>Mantine next example</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
-
-      <MantineProvider
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
-        <NormalizeCSS />
-        <GlobalStyles />
-        <NotificationsProvider>
+    <StoreProvider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
           <Component {...pageProps} />
-        </NotificationsProvider>
-      </MantineProvider>
-    </>
+        </Hydrate>
+      </QueryClientProvider>
+    </StoreProvider>
   );
-}
+};
+export default App;

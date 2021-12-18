@@ -1,6 +1,12 @@
 module.exports = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  images: {
+    domains: ["cdn.novelupdates.com", "cdn.wuxianovels.co"],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };

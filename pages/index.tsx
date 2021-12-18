@@ -1,22 +1,29 @@
-import { Title, Text, Anchor } from '@mantine/core';
+import { dehydrate, QueryClient } from "react-query";
+import Sections from "../components/common/Sections";
+import { novelsFetch, useNovels } from "../components/hooks/useNovels";
 
 export default function HomePage() {
+  const { data } = useNovels();
+
   return (
     <>
-      <Title sx={{ fontSize: 100, fontWeight: 900, letterSpacing: -2 }} align="center" mt={100}>
-        Welcome to{' '}
-        <Text inherit variant="gradient" component="span">
-          Mantine
-        </Text>
-      </Title>
-      <Text color="dimmed" align="center" size="lg" sx={{ maxWidth: 580 }} mx="auto" mt="xl">
-        This starter Next.js projects includes a minimal setup for server side rendering, if you
-        want to learn more on Mantine + Next.js integration follow{' '}
-        <Anchor href="https://mantine.dev/theming/next/" size="lg">
-          this guide
-        </Anchor>
-        . To get started edit index.tsx file.
-      </Text>
+      {data?.map((category: any) => (
+        <Sections
+          categoryName={category.name}
+          novelList={category.novels}
+          categorySlug={category.slug}
+        />
+      ))}
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["novelInfo"], novelsFetch);
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
 }

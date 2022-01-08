@@ -7,10 +7,7 @@ import { useQuery } from "react-query";
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
 const getAbsoluteURL = (path) => {
-  const baseURL = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000";
-  return baseURL + path;
+  return `https://${process.env.VERCEL_URL}` + path;
 };
 
 export async function getServerSideProps() {

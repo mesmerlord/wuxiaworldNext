@@ -1,3 +1,4 @@
+import { Container } from "@mantine/core";
 import { dehydrate, QueryClient } from "react-query";
 import Sections from "../components/common/Sections";
 import { novelsFetch, useNovels } from "../components/hooks/useNovels";
@@ -7,13 +8,15 @@ export default function HomePage() {
 
   return (
     <>
-      {data?.map((category: any) => (
-        <Sections
-          categoryName={category.name}
-          novelList={category.novels}
-          categorySlug={category.slug}
-        />
-      ))}
+      <Container>
+        {data?.map((category: any) => (
+          <Sections
+            categoryName={category.name}
+            novelList={category.novels}
+            categorySlug={category.slug}
+          />
+        ))}
+      </Container>
     </>
   );
 }

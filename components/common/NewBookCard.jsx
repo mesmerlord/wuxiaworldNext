@@ -1,85 +1,99 @@
-import { Card, Image, Text, Button, Badge, Group } from '@mantine/core';
-import { Skeleton } from '@mantine/core';
-import { routes } from '../utils/Routes';
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { useQueryClient } from 'react-query';
-import { novelInfoFetch } from '../hooks/useNovel';
-
-
-const NewBookCard = ({ bookName, imageLink, slug, loading, rating, ranking, views, chapters }) => {
-  
+import {
+  Card,
+  Image,
+  Text,
+  Button,
+  Badge,
+  Group,
+  Skeleton,
+} from "@mantine/core";
+import React, { useEffect } from "react";
+import { useQueryClient } from "react-query";
+import { novelInfoFetch } from "../hooks/useNovel";
+import Link from 'next/link'
+const NewBookCard = ({
+  bookName,
+  imageLink,
+  slug,
+  loading,
+  rating,
+  ranking,
+  views,
+  chapters,
+}) => {
   return (
     <>
       {!loading ? (
-          <Link href={`${routes.novel}${slug}`}><Card
+        <Card
           shadow="sm"
           padding="md"
           sx={{
-            width: '100%',
-            height: '100%',
-            marginBottom: '1em',
+            width: "100%",
+            height: "100%",
+            marginBottom: "1em",
+            position: "relative",
           }}
-        ><Card.Section sx={{ alignItems: 'center' }}>
-              <Image
-                src={imageLink}
-                height="200px"
-                width="100%"
-                sx={{
-                  objectFit: 'cover',
-                }}
-                alt={bookName}
-                imageProps={{ loading: 'lazy' }}
-                withPlaceholder
-              />
-            </Card.Section>
-            <Card.Section sx={{ position: 'relative' }}>
-              <Badge radius="xs" size="lg" sx={{ marginBottom: 10 }}>
-                <Text>⭐{rating}</Text>
-              </Badge>
-              <Group>
-                <Text size="sm" sx={{ margin: 5 }}>
-                  👑 Rank: {ranking}
-                </Text>
-                <Text size="sm" sx={{ margin: 5 }}>
-                  👁️ Views: {views}
-                </Text>
-              </Group>
+        ><Link 
+        href={`novel/${slug}`}><a><Card.Section sx={{ alignItems: "center" }}>
+            <Image
+              src={imageLink}
+              height="200px"
+              width="100%"
+              sx={{
+                objectFit: "cover",
+              }}
+              alt={bookName}
+              imageProps={{ loading: "lazy" }}
+              withPlaceholder
+            />
+          </Card.Section>
+          <Card.Section>
+            <Badge radius="xs" size="lg" sx={{ marginBottom: 10 }}>
+              <Text>⭐{rating}</Text>
+            </Badge>
+            <Group>
               <Text size="sm" sx={{ margin: 5 }}>
-                🔢 Chapters: {chapters}
+                👑 Rank: {ranking}
               </Text>
-              <Text
-                size="lg"
-                sx={{
-                  overflow: 'hidden',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  height: '3em',
-                  WebkitBoxOrient: 'vertical',
-                  margin: 5,
-                  marginBottom: 40,
-                  bottom: 0,
-                }}
-                weight={500}
-              >
-                {bookName}
+              <Text size="sm" sx={{ margin: 5 }}>
+                👁️ Views: {views}
               </Text>
-              <Button
-                color="grape"
-                fullWidth
-                sx={{ position: 'absolute', bottom: 0, marginTop: 10 }}
-              >
-                READ NOW
-              </Button>
-            </Card.Section></Card></Link>
+            </Group>
+            <Text size="sm" sx={{ margin: 5 }}>
+              🔢 Chapters: {chapters}
+            </Text>
+            <Text
+              size="lg"
+              sx={{
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                height: "3em",
+                WebkitBoxOrient: "vertical",
+                margin: 5,
+                marginBottom: 20,
+                bottom: 0,
+              }}
+              weight={500}
+            >
+              {bookName}
+            </Text>
+            <Button
+              color="grape"
+              fullWidth
+              sx={{ position: "absolute", bottom: 0, marginTop: 2 }}
+            >
+              READ NOW
+            </Button>
+            </Card.Section></a></Link></Card>
       ) : (
         <Card
           shadow="sm"
           padding="md"
           sx={{
-            width: '100%',
-            height: '100%',
-            marginBottom: '1em',
+            width: "100%",
+            height: "100%",
+            marginBottom: "1em",
           }}
         >
           <Card.Section>
@@ -87,13 +101,14 @@ const NewBookCard = ({ bookName, imageLink, slug, loading, rating, ranking, view
               height="200px"
               width="100%"
               sx={{
-                objectFit: 'cover',
+                objectFit: "cover",
               }}
               withPlaceholder
             />
           </Card.Section>
+          <Skeleton variant="rectangle" />
 
-          <Skeleton width={50} />
+          <Skeleton variant="text" width={50}></Skeleton>
 
           <Skeleton width={50}>
             <Button color="blue" fullWidth>
@@ -105,6 +120,5 @@ const NewBookCard = ({ bookName, imageLink, slug, loading, rating, ranking, view
     </>
   );
 };
-
 
 export default React.memo(NewBookCard);

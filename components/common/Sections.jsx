@@ -1,6 +1,5 @@
 import { Title, Grid, Col, Card, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import React from "react";
 import Link from "next/link";
 import NewBookCard from "./NewBookCard";
 import { routes } from "../utils/Routes";
@@ -69,4 +68,4 @@ const Sections = ({ categoryName, categorySlug, novelList, tagSlug }) => {
   );
 };
 
-export default React.memo(Sections);
+export default Sections;

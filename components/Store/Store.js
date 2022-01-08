@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import create from 'zustand';
+import { useMemo } from "react";
+import create from "zustand";
 
 let store;
 
@@ -33,14 +33,15 @@ export const initializeStore = (preloadedState) => {
     store = undefined;
   }
 
-  if (typeof window === 'undefined') return _store;
+  if (typeof window === "undefined") return _store;
   if (!store) store = _store;
 
   return _store;
 };
 
 export function useHydrate(initialState) {
-  const state = typeof initialState === 'string' ? JSON.parse(initialState) : initialState;
+  const state =
+    typeof initialState === "string" ? JSON.parse(initialState) : initialState;
   const store = useMemo(() => initializeStore(state), [state]);
   return store;
 }

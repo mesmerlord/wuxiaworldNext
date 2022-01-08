@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { novelInfoFetch, useNovel } from "../../components/hooks/useNovel";
 import { chapterFetch, useChapters } from "../../components/hooks/useChapters";
 import ChapterBox from "./ChapterBox";
+import Navbar from "../../components/Navbar/Navbar";
 export async function getServerSideProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
@@ -40,74 +41,11 @@ const NovelDetail = () => {
     toggleDarkMode(!darkMode);
   };
 
-  return (
-    <Background>
-      <Container size="xl" padding="xl">
-        <Button onClick={toggleDark}> Dark </Button>
-        <Card padding="xl">
-          <Group
-            direction="column"
-            position="center"
-            spacing="xl"
-            styles={{
-              child: { marginBottom: "20px" },
-            }}
-          >
-            <Title order={1} style={{ fontSize: 15 }}>
-              You Are Reading {novelData && novelData.name}
-            </Title>
-            <Image
-              src={`${novelData?.image}`}
-              alt={novelData?.name}
-              width={100}
-              height={100}
-            />
-            {novelData && (
-              <Group
-                direction="column"
-                position="center"
-                spacing="xl"
-                styles={{
-                  child: { marginBottom: "20px" },
-                }}
-              >
-                <Title order={2}>{novelData.name}</Title>
+  return <Background></Background>;
+};
 
-                <Title order={5}>Views - {novelData.views}</Title>
-                <Container size="sm">
-                  <Group
-                    styles={{
-                      child: { marginRight: "20px" },
-                    }}
-                  >
-                    <Title order={5}>Category - </Title>
-                    {/* {categories} */}
-                  </Group>
-                </Container>
-
-                <Container size="sm">
-                  {/* <Title order={5}>Tags - {tags}</Title> */}
-                </Container>
-                <br />
-                <Title order={5}>Author - {novelData.author.name}</Title>
-                <br />
-                <Container size="md">
-                  <Text size="lg">{novelData.description}</Text>
-                </Container>
-              </Group>
-            )}
-          </Group>
-        </Card>
-      </Container>
-      {/* <Container>
-        {chapterData ? (
-          <ChapterBox chapters={chapterData} />
-        ) : (
-          <Card sx={{ height: '200px', width: '200px' }}></Card>
-        )}
-      </Container> */}
-    </Background>
-  );
+NovelDetail.getLayout = function getLayout(page) {
+  return <Navbar>{page}</Navbar>;
 };
 
 export default NovelDetail;

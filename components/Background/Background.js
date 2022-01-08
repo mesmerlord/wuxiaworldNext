@@ -1,8 +1,12 @@
-import { Paper } from '@mantine/core';
-import { useEffect } from 'react';
-import { useStore } from '../Store/StoreProvider';
-import { MantineProvider, NormalizeCSS, GlobalStyles, ColorSchemeProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
+import { Paper } from "@mantine/core";
+import { useStore } from "../Store/StoreProvider";
+import {
+  MantineProvider,
+  NormalizeCSS,
+  GlobalStyles,
+  ColorSchemeProvider,
+} from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 
 export function getServerSideProps() {
   const zustandStore = initializeStore();
@@ -18,7 +22,7 @@ const Background = (props) => {
   return (
     <MantineProvider
       theme={{
-        colorScheme: darkMode ? 'dark' : 'light',
+        colorScheme: darkMode ? "dark" : "light",
       }}
     >
       <NormalizeCSS />
@@ -26,10 +30,12 @@ const Background = (props) => {
       <NotificationsProvider>
         <Paper
           radius={0}
-          style={{ minHeight: '90vh', paddingTop: '15px' }}
+          style={{ minHeight: "90vh", paddingTop: "15px" }}
           sx={(theme) => ({
             backgroundColor:
-              theme.colorScheme == 'light' ? theme.colors.gray[1] : theme.colors.dark[4],
+              theme.colorScheme == "light"
+                ? theme.colors.gray[1]
+                : theme.colors.dark[4],
           })}
         >
           {props.children}

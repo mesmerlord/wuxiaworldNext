@@ -4,19 +4,25 @@ import Sections from "../components/common/Sections";
 import { novelsFetch, useNovels } from "../components/hooks/useNovels";
 import Head from "next/head";
 import { useQuery } from "react-query";
+import RecentlyUpdated from "../components/common/RecentlyUpdated.js";
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
+
 const getAbsoluteURL = (path) => {
   return `https://${process.env.VERCEL_URL}` + path;
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["novelInfo"], novelsFetch);
+  await queryClient.prefetchQuery(["novelInfo"], novelsFetch, {
+    staleTime: 100000,
+  });
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 60 * 60 * 3,
   };
 }
 
@@ -53,6 +59,7 @@ export default function HomePage({ dehydratedState }) {
             categorySlug={category.slug}
           />
         ))}
+        <RecentlyUpdated />
       </Container>
     </>
   );

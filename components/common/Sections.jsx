@@ -3,9 +3,15 @@ import { useMediaQuery } from "@mantine/hooks";
 import Link from "next/link";
 import NewBookCard from "./NewBookCard";
 import { routes } from "../utils/Routes";
+import { useEffect, useState } from "react";
 
 const Sections = ({ categoryName, categorySlug, novelList, tagSlug }) => {
-  const desktop = useMediaQuery("(min-width: 1024px)");
+  const [desktop, setDesktop] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  useEffect(() => {
+    setDesktop(isDesktop);
+  }, [desktop]);
 
   const novels = novelList?.map((novel) => (
     <Col span={6} xs={4} sm={3} md={3} lg={3} key={novel.slug}>

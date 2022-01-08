@@ -8,8 +8,6 @@ import {
   Skeleton,
 } from "@mantine/core";
 import React, { useEffect } from "react";
-import { useQueryClient } from "react-query";
-import { novelInfoFetch } from "../hooks/useNovel";
 import Link from 'next/link'
 const NewBookCard = ({
   bookName,
@@ -24,7 +22,9 @@ const NewBookCard = ({
   return (
     <>
       {!loading ? (
-        <Card
+        
+        <Link 
+        href={`novel/${slug}`}><a style = {{textDecoration:"none"}}><Card
           shadow="sm"
           padding="md"
           sx={{
@@ -33,8 +33,7 @@ const NewBookCard = ({
             marginBottom: "1em",
             position: "relative",
           }}
-        ><Link 
-        href={`novel/${slug}`}><a><Card.Section sx={{ alignItems: "center" }}>
+        ><Card.Section sx={{ alignItems: "center" }}>
             <Image
               src={imageLink}
               height="200px"
@@ -85,7 +84,7 @@ const NewBookCard = ({
             >
               READ NOW
             </Button>
-            </Card.Section></a></Link></Card>
+            </Card.Section></Card></a></Link>
       ) : (
         <Card
           shadow="sm"

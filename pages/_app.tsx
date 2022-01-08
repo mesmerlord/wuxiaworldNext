@@ -1,9 +1,9 @@
+import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import { useHydrate } from "../components/Store/Store";
 import { StoreProvider } from "../components/Store/StoreProvider";
 import React from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { MantineProvider } from "@mantine/core";
 import Navbar from "../components/Navbar/Navbar";
 import Background from "../components/Background/Background";
 

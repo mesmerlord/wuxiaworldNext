@@ -5,6 +5,12 @@ import { novelsFetch, useNovels } from "../components/hooks/useNovels";
 import Head from "next/head";
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
+const getAbsoluteURL = (path) => {
+  const baseURL = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
+  return baseURL + path;
+};
 export default function HomePage() {
   const { data } = useNovels();
   const title = `${siteName} - Read Chinese, Korean and Japanese Novels`;
@@ -20,6 +26,13 @@ export default function HomePage() {
         <meta property="og:site_name" content={`${siteName}`} />
         <meta name="twitter:label1" content="Est reading time" />
         <meta name="twitter:data1" content="5 minutes" />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={getAbsoluteURL("apple-touch-icon.png")}
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <Container>

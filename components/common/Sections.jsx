@@ -12,11 +12,15 @@ const Sections = ({ categoryName, categorySlug, novelList, tagSlug }) => {
       <NewBookCard
         bookName={novel.name}
         imageLink={
-          !mobile
-            ? novel.image
-            : novel.imageThumb
-            ? novel.imageThumb
-            : novel.image
+          mobile
+            ? `${novel?.image?.replace(
+                "https://cdn.wuxianovels.co/",
+                "https://ik.imagekit.io/opyvhypp7cj/"
+              )}?tr=w-150`
+            : `${novel?.image?.replace(
+                "https://cdn.wuxianovels.co/",
+                "https://ik.imagekit.io/opyvhypp7cj/"
+              )}?tr=w-500`
         }
         badgeText={"New"}
         slug={novel.slug}

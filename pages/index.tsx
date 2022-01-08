@@ -3,6 +3,7 @@ import { dehydrate, QueryClient } from "react-query";
 import Sections from "../components/common/Sections";
 import { novelsFetch, useNovels } from "../components/hooks/useNovels";
 import Head from "next/head";
+import { useQuery } from "react-query";
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
 const getAbsoluteURL = (path) => {
@@ -11,10 +12,22 @@ const getAbsoluteURL = (path) => {
     : "http://localhost:3000";
   return baseURL + path;
 };
-export default function HomePage() {
-  const { data } = useNovels();
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["novelInfo"], novelsFetch);
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
+
+export default function HomePage({ dehydratedState }) {
   const title = `${siteName} - Read Chinese, Korean and Japanese Novels`;
   const description = `${siteName} has the latest translations of your favorite Chinese, Japanese, Korean - Light Novels and Web Novels. All Chapters Are Updated Daily and New Novels Added Very Frequently.`;
+  const { data } = useQuery(["novelInfo"], novelsFetch);
+
   return (
     <>
       <Head>
@@ -36,7 +49,7 @@ export default function HomePage() {
       </Head>
 
       <Container>
-        {data?.map((category: any) => (
+        {data.map((category: any) => (
           <Sections
             categoryName={category.name}
             novelList={category.novels}
@@ -46,14 +59,4 @@ export default function HomePage() {
       </Container>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["novelInfo"], novelsFetch);
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
 }

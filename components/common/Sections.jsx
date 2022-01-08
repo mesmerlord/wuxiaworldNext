@@ -5,14 +5,14 @@ import NewBookCard from "./NewBookCard";
 import { routes } from "../utils/Routes";
 
 const Sections = ({ categoryName, categorySlug, novelList, tagSlug }) => {
-  const mobile = useMediaQuery("(max-width: 1024px)");
+  const desktop = useMediaQuery("(min-width: 1024px)");
 
   const novels = novelList?.map((novel) => (
     <Col span={6} xs={4} sm={3} md={3} lg={3} key={novel.slug}>
       <NewBookCard
         bookName={novel.name}
         imageLink={
-          mobile
+          !desktop
             ? `${novel?.image?.replace(
                 "https://cdn.wuxianovels.co/",
                 "https://ik.imagekit.io/opyvhypp7cj/"

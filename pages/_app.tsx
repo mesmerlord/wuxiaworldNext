@@ -1,4 +1,3 @@
-import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import { useHydrate } from "../components/Store/Store";
 import { StoreProvider } from "../components/Store/StoreProvider";
@@ -17,12 +16,11 @@ const App = (props: AppProps) => {
     <StoreProvider store={store}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <MantineProvider withGlobalStyles withNormalizeCSS>
+          <Background>
             <Navbar />
-            <Background>
-              <Component {...pageProps} />
-            </Background>
-          </MantineProvider>
+
+            <Component {...pageProps} />
+          </Background>
         </Hydrate>
       </QueryClientProvider>
     </StoreProvider>

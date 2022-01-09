@@ -24,7 +24,7 @@ const Navbar = () => {
       withBorder={true}
       shadow="sm"
       radius={0}
-      sx={
+      sx={(theme) =>
         !phone && sticky
           ? {
               position: "sticky",

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import axios from "axios";
+import { useQuery } from "react-query";
 // import { toast } from 'react-toastify';
 
 const apiHome = process.env.NEXT_PUBLIC_API_HOME;
@@ -13,10 +13,10 @@ const novelInfoFetch = ({ queryKey }) => {
   });
 };
 const useNovel = (slug) => {
-  return useQuery(['novelInfo', slug], novelInfoFetch, {
+  return useQuery(["novelInfo", slug], novelInfoFetch, {
     refetchOnWindowFocus: false,
     retry: 2,
-    staleTime: 100000,
+    staleTime: Infinity,
     // onError: (error) => {
     //   toast.error(
     //     'This Novel URL has probably been moved, please use search bar to find the novel and try again'

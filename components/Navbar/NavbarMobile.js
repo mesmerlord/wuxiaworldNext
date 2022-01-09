@@ -29,7 +29,17 @@ const NavbarMobile = () => {
   // }, [location]);
 
   return (
-    <Paper padding="xl" shadow="md" radius={0}>
+    <Paper
+      padding="xl"
+      shadow="md"
+      radius={0}
+      sx={(theme) => ({
+        backgroundColor:
+          theme.colorScheme == "light"
+            ? theme.colors.gray[1]
+            : theme.colors.dark[4],
+      })}
+    >
       <Container padding="xs">
         <Group position="apart">
           <LinkText href={routes.home}>
@@ -39,7 +49,7 @@ const NavbarMobile = () => {
             </Group>
           </LinkText>
           <Divider orientation="vertical" margins="sm" />
-          <Group withGutter>
+          <Group>
             <ActionIcon
               variant="outline"
               color={darkMode ? "yellow" : "blue"}

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const apiHome = process.env.NEXT_PUBLIC_API_HOME;
 
@@ -11,9 +11,10 @@ const novelsFetch = () => {
   });
 };
 const useNovels = () => {
-  return useQuery(['home_view'], novelsFetch, {
+  return useQuery(["home_view"], novelsFetch, {
     refetchOnWindowFocus: false,
     retry: 2,
+    staleTime: Infinity,
   });
 };
 export { useNovels, novelsFetch };

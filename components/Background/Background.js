@@ -1,11 +1,6 @@
 import { Paper } from "@mantine/core";
 import { useStore } from "../Store/StoreProvider";
-import {
-  MantineProvider,
-  NormalizeCSS,
-  GlobalStyles,
-  ColorSchemeProvider,
-} from "@mantine/core";
+import { MantineProvider, NormalizeCSS, GlobalStyles } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 
 export function getServerSideProps() {
@@ -24,13 +19,13 @@ const Background = (props) => {
       theme={{
         colorScheme: darkMode ? "dark" : "light",
       }}
+      withGlobalStyles
+      withNormalizeCSS
     >
-      <NormalizeCSS />
-      <GlobalStyles />
       <NotificationsProvider>
         <Paper
           radius={0}
-          style={{ minHeight: "90vh", paddingTop: "15px" }}
+          style={{ minHeight: "90vh" }}
           sx={(theme) => ({
             backgroundColor:
               theme.colorScheme == "light"

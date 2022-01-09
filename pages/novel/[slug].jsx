@@ -1,12 +1,12 @@
-import {
-  Container,
-  Paper,
-  Card,
-  Group,
-  Button,
-  Title,
-  Text,
-} from "@mantine/core";
+// import {
+//   Container,
+//   Paper,
+//   Card,
+//   Group,
+//   Button,
+//   Title,
+//   Text,
+// } from "@mantine/core";
 import Background from "../../components/Background/Background";
 import { useStore } from "../../components/Store/StoreProvider";
 import { dehydrate, QueryClient } from "react-query";
@@ -17,7 +17,9 @@ import MobileDetail from "../../components/PageSpecific/NovelDetail/MobileDetail
 export async function getServerSideProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch);
+  await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
+    staleTime: Infinity,
+  });
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

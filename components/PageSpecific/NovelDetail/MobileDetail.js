@@ -16,11 +16,11 @@ import Description from "./Description";
 import TagBadges from "./TagSection";
 import CategorySection from "./CategorySection";
 import { useState } from "react";
-// import ChapterBox from "./ChapterBox";
+import dynamic from "next/dynamic";
 
 // const TagBadges = lazy(() => import("./TagSection"));
 // const CategorySection = lazy(() => import("./CategorySection"));
-// const ChapterBox = lazy(() => import("./ChapterBox"));
+const ChapterBox = dynamic(() => import("./ChapterBox"));
 
 const MobileDetail = ({
   novelData,
@@ -122,14 +122,14 @@ const MobileDetail = ({
             <Tab label={<Title order={3}>Description</Title>}>
               <Description height={200} text={novelData?.description} />
             </Tab>
-            {/* <Tab label={<Title order={3}>Chapters</Title>}>
+            <Tab label={<Title order={3}>Chapters</Title>}>
               <ChapterBox
                 loading={false}
-                lastReadIndex={bookmarkData?.last_read?.index}
+                // lastReadIndex={bookmarkData?.last_read?.index}
                 novelParent={id}
-                bookmarkData={bookmarkData}
+                // bookmarkData={bookmarkData}
               />
-            </Tab> */}
+            </Tab>
           </Tabs>
 
           <Group direction="column">

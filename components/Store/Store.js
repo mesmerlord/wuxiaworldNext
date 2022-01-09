@@ -7,6 +7,28 @@ const initialState = {
   lastUpdate: 0,
   darkMode: false,
   count: 0,
+  siteName: process.env.NEXT_PUBLIC_SITE_NAME,
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+  accessToken:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("token"))
+      : null,
+  userInfo:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("user-info"))
+      : null,
+  settings:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("settings"))
+      : { darkMode: true },
+  darkMode:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("dark-mode"))
+      : true,
+  fontSize:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("font-size"))
+      : 18,
 };
 
 function initStore(preloadedState = initialState) {

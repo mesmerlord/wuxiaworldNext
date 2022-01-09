@@ -698,11 +698,11 @@
     chalk "^4.0.0"
 
 "@mantine/core@^3.4.2":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-3.5.3.tgz#ff41c150e3f120e4cd33602cd73e1ad6b369034e"
-  integrity sha512-FHg5uSVbzGYo6AqIINcfdBjzQjZDOpukf0Y3uEr5n0c08w5U6fUI1Ki0EYl/h7siPzkb07tjj+XJa1weZh2FpA==
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-3.5.4.tgz#8bab8b3c5ffe9acdf5067c1e522d70988fbdb590"
+  integrity sha512-MDmp44kWavJC4OWTfl8DRFGeZgFDFCJP5Cfiruikyd4A232zLJjZBP5ZhUA7XR80F6YpSj2MkP2KVaPoYALLVw==
   dependencies:
-    "@mantine/styles" "3.5.3"
+    "@mantine/styles" "3.5.4"
     "@popperjs/core" "^2.9.3"
     "@radix-ui/react-scroll-area" "^0.1.1"
     clsx "^1.1.1"
@@ -710,43 +710,43 @@
     react-textarea-autosize "^8.3.2"
 
 "@mantine/hooks@^3.4.2":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-3.5.3.tgz#da61eb04e48e5e6af79ae31b7b92bdfd6db154b8"
-  integrity sha512-TIhbslOlzeth51ivYFIhsphRzKL0V2XiFA+XNRXa4SieE9EKFapXGcEHspMO3ngt1x2mIemi0LM27szAZ/3ALA==
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-3.5.4.tgz#3fe3cb270c96a3866b2cd22fa435fccd58a162a3"
+  integrity sha512-emSsdeJ9CySKwh8A6UndfKrQuRY+OB3xs+JkCVOVBUo8upXRKLrvDxzPpYhiW3SAn8ruUfqOwErhOMDWoi+6Tw==
 
-"@mantine/next@^3.5.3":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/next/-/next-3.5.3.tgz#9bc0846f594951ef7ad8f7071ee17531a92d4bde"
-  integrity sha512-l4yRQSccCrYzgErjAAL/u9bV68If6HH++yaBgnXKJQ9NLPHvbgUks+lMQhCrUm/5cvZ1yEaxR8wz/PlKEkE8zw==
+"@mantine/next@^3.5.4":
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/next/-/next-3.5.4.tgz#7102743c9562bd703bddcb9879f44c96be296ce7"
+  integrity sha512-tEEOG5ulLbRP/9X3ouqlFBfhNvWeGDK8MVPEg5oYkzJ95ZFVcZYTWQTS9+smZm1kdCJsdCSOgeQYo6dtiV8bkQ==
   dependencies:
-    "@mantine/ssr" "3.5.3"
+    "@mantine/ssr" "3.5.4"
 
 "@mantine/notifications@^3.4.2":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-3.5.3.tgz#48ace7135e6fe88632aa4f6ee40ad98fe6ae7f7d"
-  integrity sha512-LUinrseV21UKB+pjFJTZwb7Cwa3lvLz47pqXfRN/wx4AnX82GE7y6FX4uaVAuRD9QH/fiAaytL8RyAy88pHbOQ==
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-3.5.4.tgz#ed268ad33b6e1291530904d0f43b81d995b904db"
+  integrity sha512-fcA8v7SDlj6KNkdE1nFMptzg4VnX/HYzMpNCMqezMRViOUr9YPCtZ5lOprF9KmWzeSMkN3cRouyq1+nSF/H8kQ==
   dependencies:
     clsx "^1.1.1"
     react-transition-group "^4.4.2"
 
-"@mantine/ssr@3.5.3":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-3.5.3.tgz#49c2b56febb6837f67e26754b6dceb68d4fcdadb"
-  integrity sha512-sNp6ZOxx+MPNWNN7XuW5OATNSBHAJcqZEU0SeRs/9+yjDr0OMSlBtGy3HKVUonhMEnp8Fm9mmTbQV1nYdQVtoA==
+"@mantine/ssr@3.5.4":
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-3.5.4.tgz#46e2f6e8148f14d9fa51f66fdf2483369b300fac"
+  integrity sha512-53YmrXbj9BRgalvkn29f9venec59lbZp/pigAOB3cmFC8pFSRA5Ob7OLO0xRKHeXG1RDmPh/Q44xXGChbb5Lhg==
   dependencies:
     "@emotion/cache" "^11.7.1"
     "@emotion/react" "^11.7.1"
     "@emotion/serialize" "^1.0.2"
     "@emotion/server" "^11.4.0"
     "@emotion/utils" "^1.0.0"
-    "@mantine/styles" "3.5.3"
+    "@mantine/styles" "3.5.4"
     csstype "^3.0.9"
     html-react-parser "^1.3.0"
 
-"@mantine/styles@3.5.3":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-3.5.3.tgz#1b3aac83342519484e9a43962ec38b855a2542bd"
-  integrity sha512-fb9tjpRfTv6nIGYppUdRfk3fcGvCy14OEDZeeZ5Xh5o3jNtZN//pGkOETIAHAaHnPyQxVB2Bys9gYCSHf6MbPw==
+"@mantine/styles@3.5.4":
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-3.5.4.tgz#413fd1122d91b6f3e40f6e888b9b4640798718f8"
+  integrity sha512-Tdm8DBeHaM/0Qo5UEyZC30k2xG8u1l3bmgPIW/kTVuXT6zDJjVAnQPP0Jwj133EMAex5ivk7rmjmH2vzPxFu/A==
   dependencies:
     "@emotion/cache" "^11.7.1"
     "@emotion/react" "^11.7.1"
@@ -5440,6 +5440,11 @@ raw-body@2.4.1:
     http-errors "1.7.3"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
+
+react-cool-inview@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/react-cool-inview/-/react-cool-inview-2.0.8.tgz#f8b7aeaf6e880e443c339b8d5e2719374ff8fdc1"
+  integrity sha512-D8ilAp7HwRxRMA1xRAvXZF8yhbL/6WWD5nxYX+K1GwbGQuMmCkrr5Bhm/2Mgn8XlFLzAU9frQ7g0UILxt1SnOQ==
 
 react-display-name@^0.2.4:
   version "0.2.5"

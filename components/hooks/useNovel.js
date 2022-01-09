@@ -1,8 +1,7 @@
+import { useNotifications } from "@mantine/notifications";
 import axios from "axios";
 import { useQuery } from "react-query";
-// import { toast } from 'react-toastify';
-
-const apiHome = process.env.NEXT_PUBLIC_API_HOME;
+import { apiHome } from "../utils/siteName";
 
 const novelInfoFetch = ({ queryKey }) => {
   const [_, id] = queryKey;
@@ -13,18 +12,22 @@ const novelInfoFetch = ({ queryKey }) => {
   });
 };
 const useNovel = (slug) => {
+  const notifications = useNotifications();
+
+  let errorMessage =
+    "Novel not found, it might have been moved or deleted. Please refresh and if that doesn't work, try logging out then back in";
+  let errorTitle = "No Chapters Found";
   return useQuery(["novelInfo", slug], novelInfoFetch, {
     refetchOnWindowFocus: false,
     retry: 2,
     staleTime: Infinity,
-    // onError: (error) => {
-    //   toast.error(
-    //     'This Novel URL has probably been moved, please use search bar to find the novel and try again'
-    //   );
-    //   // setTimeout(() => {
-    //   //   // redirectHome();
-    //   // }, 4000);
-    // },
+    onError: (error) => {
+      const notifId = notifications.showNotification({
+        title: errorTitle,
+        message: errorMessage,
+        autoClose: 10000,
+      });
+    },
   });
 };
 export { useNovel, novelInfoFetch };

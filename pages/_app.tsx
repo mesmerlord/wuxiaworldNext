@@ -5,6 +5,7 @@ import React from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import Navbar from "../components/Navbar/Navbar";
 import Background from "../components/Background/Background";
+import Footer from "../components/Footer/Footer";
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
@@ -20,6 +21,7 @@ const App = (props: AppProps) => {
             <Navbar />
 
             <Component {...pageProps} />
+            <Footer />
           </Background>
         </Hydrate>
       </QueryClientProvider>

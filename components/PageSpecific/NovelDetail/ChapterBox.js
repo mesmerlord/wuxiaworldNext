@@ -13,22 +13,20 @@ import {
   Button,
   NumberInput,
 } from "@mantine/core";
-import LinkText from "../../components/common/LinkText.js";
-import { routes } from "../../utils/Routes";
-import { useStore } from "../../Store/Store.js";
 import React, { Suspense, useState, lazy, useEffect } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { useUpdateBookmark } from "../../hooks/useBookmark.js";
 import { useNotifications } from "@mantine/notifications";
 import { useChapters } from "../../hooks/useChapters.js";
-import { useHistory } from "react-router-dom";
-import NewCard from "../../components/common/NewCard.js";
-const ChaptersModal = lazy(() =>
-  import("../../components/common/ChaptersModal")
-);
+import { useRouter } from "next/router";
+import NewCard from "../../common/NewCard";
+import { routes } from "../../utils/Routes.js";
+import dynamic from "next/dynamic";
+import { useStore } from "../../Store/StoreProvider.js";
+import LinkText from "../../common/LinkText.js";
+const ChaptersModal = dynamic(() => import("../../common/ChaptersModal"));
 function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
   const [goChapter, setGoChapter] = useState(null);
-
   const loggedIn = useStore((state) => state.accessToken);
   const phone = useMediaQuery("(max-width: 768px)");
   const notifications = useNotifications();
@@ -38,7 +36,7 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
   const [lastRead, setLastRead] = useState(lastReadIndex);
 
   const { isLoading, error, data, refetch } = useChapters(novelParent);
-  const history = useHistory();
+  const router = useRouter();
 
   const changeOrdering = () => {
     setDescending(!descending);
@@ -81,7 +79,7 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
         message: "Sorry, no such chapter",
       });
     } else {
-      history.push(`/chapter/${novelParent}-${chapToGo}`);
+      router.push(`/chapter/${novelParent}-${chapToGo}`);
     }
   };
   const chapterBookmark = (chapSlug) => {
@@ -182,7 +180,7 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
                     spacing="md"
                   >
                     <LinkText
-                      to={`${routes.chapter}${chapter.novSlugChapSlug}`}
+                      href={`${routes.chapter}${chapter.novSlugChapSlug}`}
                     >
                       <Title
                         order={4}
@@ -221,7 +219,9 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
                       />
                     )}
                   </Group>
-                  <LinkText to={`${routes.chapter}${chapter.novSlugChapSlug}`}>
+                  <LinkText
+                    href={`${routes.chapter}${chapter.novSlugChapSlug}`}
+                  >
                     <Group
                       position="right"
                       styles={{

@@ -11,6 +11,7 @@ const Seo = ({ description, title, url, image, loading = true }) => {
       <Head>
         <title>{title}</title>
         <meta name="description" content={`${description}`} />
+        <meta property="og:description" content={`${description}`} />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={`${title}`} />

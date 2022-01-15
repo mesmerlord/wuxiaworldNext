@@ -23,11 +23,11 @@ const initialState = {
       : { darkMode: true },
   darkMode:
     typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("dark-mode"))
+      ? JSON.parse(localStorage.getItem("dark-mode")) || true
       : true,
   fontSize:
     typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("font-size"))
+      ? JSON.parse(localStorage.getItem("font-size")) || 18
       : 18,
 };
 
@@ -36,10 +36,34 @@ function initStore(preloadedState = initialState) {
     ...initialState,
     ...preloadedState,
 
-    toggleDarkMode: (params) => {
-      set({
-        darkMode: params,
-      });
+    changeSettings: (params) => {
+      const loggedIn = get().accessToken;
+      const settings = get().settings;
+      if (!loggedIn) {
+        if (params.darkMode != undefined) {
+          set((state) => ({ darkMode: params.darkMode }));
+          localStorage.setItem("dark-mode", JSON.stringify(params.darkMode));
+        } else if (params.fontSize) {
+          set((state) => ({ fontSize: params.fontSize }));
+          localStorage.setItem("font-size", JSON.stringify(params.fontSize));
+        }
+      } else {
+        axios
+          .patch(`${apiUrl}/api/settings/${settings.id}/`, params)
+          .then((response) => {
+            localStorage.setItem("settings", JSON.stringify(response.data));
+            localStorage.setItem(
+              "dark-mode",
+              JSON.stringify(response.data.darkMode)
+            );
+            set((state) => ({ settings: response.data }));
+            set((state) => ({ darkMode: response.data.darkMode }));
+            set((state) => ({ fontSize: response.data.fontSize }));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   }));
 }

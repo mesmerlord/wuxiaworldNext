@@ -20,9 +20,9 @@ const NavbarMobile = () => {
   // const changeSettings = useStore((state) => state.changeSettings);
 
   // const userInfo = useStore((state) => state.userInfo);
-  const toggleDarkMode = useStore((state) => state.toggleDarkMode);
 
   const darkMode = useStore((state) => state.darkMode);
+  const changeSettings = useStore((state) => state.changeSettings);
 
   // useEffect(() => {
   //   setOpened(false);
@@ -54,7 +54,9 @@ const NavbarMobile = () => {
               variant="outline"
               color={darkMode ? "yellow" : "blue"}
               onClick={() => {
-                toggleDarkMode(!darkMode);
+                changeSettings({
+                  darkMode: !darkMode,
+                });
               }}
               size="md"
               loaderProps={{

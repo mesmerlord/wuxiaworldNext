@@ -56,9 +56,9 @@ const NovelDetail = (props) => {
   return (
     <Background>
       <Seo
-        url={`${routes.novel}${novelData.slug}`}
-        image={`${novelData.image}`}
-        title={`${novelData.name} - Read Wuxia Novels at ${siteName}`}
+        url={`${routes.novel}${novelData?.slug}`}
+        image={`${novelData?.image}`}
+        title={`${novelData?.name} - Read Wuxia Novels at ${siteName}`}
         description={`You are reading ${novelData?.name} online for free on ${siteName}. Read ${novelData?.name} and more Wuxia, Xuanhuan, Korean and Japanese novels at ${siteName}. Continue reading . ${novelData?.description}`}
         loading={false}
       />

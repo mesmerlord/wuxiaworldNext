@@ -119,7 +119,7 @@ const ChapterView = ({ chapterSlug }) => {
               </LinkText>
             )}
           </Breadcrumbs>
-          {/* {data && (
+          {data && (
             <>
               <Center>
                 <Title order={1} transform="uppercase">
@@ -136,7 +136,7 @@ const ChapterView = ({ chapterSlug }) => {
                 chapterIndex={data?.index}
               />
             </>
-          )} */}
+          )}
         </div>
       </Container>
       <Container>
@@ -192,7 +192,7 @@ const ChapterView = ({ chapterSlug }) => {
         </div>
         <br />
 
-        {/* {data && (
+        {data && (
           <>
             <Buttons
               key={data.index}
@@ -202,7 +202,7 @@ const ChapterView = ({ chapterSlug }) => {
               chapterIndex={data.index}
             />
           </>
-        )} */}
+        )}
       </Container>
       <Affix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scroll.y > 0}>
@@ -222,4 +222,4 @@ const ChapterView = ({ chapterSlug }) => {
   );
 };
 
-export default React.memo(ChapterView);
+export default ChapterView;

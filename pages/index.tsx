@@ -53,6 +53,7 @@ export default function HomePage({ dehydratedState }) {
             categoryName={category.name}
             novelList={category.novels}
             categorySlug={category.slug}
+            key={category.slug}
           />
         ))}
         <RecentlyUpdated />

@@ -46,12 +46,12 @@ const Recommendations = ({ novel_slug }) => {
                 imageLink={
                   mobile
                     ? `${novel?.image?.replace(
-                        process.env.REACT_APP_SPACES_LINK,
-                        process.env.REACT_APP_IMAGE_CDN
+                        process.env.NEXT_PUBLIC_SPACES_LINK,
+                        process.env.NEXT_PUBLIC_IMAGE_CDN
                       )}?tr=w-150`
                     : `${novel?.image?.replace(
-                        process.env.REACT_APP_SPACES_LINK,
-                        process.env.REACT_APP_IMAGE_CDN
+                        process.env.NEXT_PUBLIC_SPACES_LINK,
+                        process.env.NEXT_PUBLIC_IMAGE_CDN
                       )}?tr=w-500`
                 }
                 badgeText={"New"}

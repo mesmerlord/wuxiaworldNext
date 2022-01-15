@@ -6,19 +6,35 @@ import DisqusComments from "../../components/common/DisqusComments";
 import useInView from "react-cool-inview";
 import { Container } from "@mantine/core";
 import dynamic from "next/dynamic";
+import BackgroundLoading from "../../components/Background/BackgroundLoading";
+import ChapterView from "../../components/PageSpecific/Chapter/ChapterView";
+import { dehydrate, QueryClient } from "react-query";
 
-const ChapterView = dynamic(
-  () => import("../../components/PageSpecific/Chapter/ChapterView"),
-  {
-    ssr: false,
-  }
-);
+// const ChapterView = dynamic(
+//   () => import("../../components/PageSpecific/Chapter/ChapterView"),
+//   {
+//     ssr: false,
+//     loading: () => <BackgroundLoading />,
+//   }
+// );
 const Recommendations = dynamic(
   () => import("../../components/common/Recommendations"),
   {
     ssr: false,
   }
 );
+export async function getServerSideProps(context) {
+  const { slug } = context.params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["chapterFetch", slug], chapterFetch, {
+    staleTime: Infinity,
+  });
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 const Chapter = (props) => {
   const router = useRouter();
 

@@ -29,9 +29,19 @@ const Buttons = ({ novelParent, nextChapter, prevChapter, chapterIndex }) => {
   };
   const handleKeyPress = (event) => {
     if (event.keyCode === 37 && prevChapter) {
-      router.push(`${routes.chapter}${novelParent}-${prevChapter}`);
+      router.push(
+        `${routes.chapter}${novelParent}-${prevChapter}`,
+        `${routes.chapter}${novelParent}-${prevChapter}`,
+        { shallow: true }
+      );
     } else if (event.keyCode === 39 && nextChapter) {
-      router.push(`${routes.chapter}${novelParent}-${nextChapter}`);
+      router.push(
+        `${routes.chapter}${novelParent}-${nextChapter}`,
+        `${routes.chapter}${novelParent}-${nextChapter}`,
+        {
+          shallow: true,
+        }
+      );
     }
   };
   useEffect(() => {

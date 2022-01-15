@@ -6,7 +6,7 @@ const CategorySection = ({ categoryList }) => {
   return (
     <>
       {categoryList?.map((item) => (
-        <LinkText href={`${routes.category}${item.slug}`}>
+        <LinkText href={`${routes.category}${item.slug}`} key={item.slug}>
           <Badge
             key={item.name}
             variant="filled"

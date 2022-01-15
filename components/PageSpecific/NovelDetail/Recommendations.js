@@ -40,7 +40,7 @@ const Recommendations = ({ novel_slug, loadingCount }) => {
               </Col>
             ))}
           {data?.results?.map((novel) => (
-            <Col span={6} xs={4} sm={3} md={3} lg={3}>
+            <Col span={6} xs={4} sm={3} md={3} lg={3} key={novel.slug}>
               <SmallBookCard
                 bookName={novel.name}
                 imageLink={

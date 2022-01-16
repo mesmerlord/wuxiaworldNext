@@ -114,30 +114,26 @@ const TagPage = ({ pages }) => {
       case "dots":
         return <Text>..</Text>;
       case "next":
-        return page != Number(pages) ? (
+        return page != pages ? (
           <LinkText
-            href={`${routes.tag}${slug}?page=${page + 1}&order_by=${orderBy}`}
+            href={`${routes.tag}${slug}?page=${
+              parseInt(page) + 1
+            }&order_by=${orderBy}`}
           >
             <Button variant="default">{">"}</Button>
           </LinkText>
-        ) : (
-          <Button variant="default" disabled>
-            {">"}
-          </Button>
-        );
+        ) : null;
 
       case "prev":
         return page != 1 ? (
           <LinkText
-            href={`${routes.tag}${slug}?page=${page - 1}&order_by=${orderBy}`}
+            href={`${routes.tag}${slug}?page=${
+              parseInt(page) - 1
+            }&order_by=${orderBy}`}
           >
             <Button variant="default">{"<"}</Button>
           </LinkText>
-        ) : (
-          <Button variant="default" disabled>
-            {"<"}
-          </Button>
-        );
+        ) : null;
       case "first":
         return page != 1 ? (
           <LinkText href={`${routes.tag}${slug}?page=1&order_by=${orderBy}`}>
@@ -145,9 +141,9 @@ const TagPage = ({ pages }) => {
           </LinkText>
         ) : null;
       case "last":
-        return page != Number(pages) ? (
+        return page != pages ? (
           <LinkText
-            href={`${routes.tag}${slug}?page=${Number(
+            href={`${routes.tag}${slug}?page=${parseInt(
               pages
             )}&order_by=${orderBy}`}
           >

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  dehydrate,
-  QueryClient,
-  useInfiniteQuery,
-  useQuery,
-} from "react-query";
+import { dehydrate, QueryClient, useQuery } from "react-query";
 import { Button, Center, Container, Grid, Text } from "@mantine/core";
 import { useStore } from "../../components/Store/StoreProvider.js";
 import { apiHome } from "../../components/utils/siteName.js";
@@ -14,7 +9,6 @@ import Background from "../../components/Background/Background.js";
 import OrderFilter from "../../components/common/OrderFilter.js";
 import { useRouter } from "next/router";
 import { routes } from "../../components/utils/Routes.js";
-import Sections from "../../components/common/Sections.jsx";
 import { Pagination } from "@mantine/core";
 import LinkText from "../../components/common/LinkText.js";
 import BackgroundLoading from "../../components/Background/BackgroundLoading.js";
@@ -120,34 +114,26 @@ const CategoryPage = ({ pages }) => {
       case "dots":
         return <Text>..</Text>;
       case "next":
-        return page != Number(pages) ? (
+        return page != pages ? (
           <LinkText
             href={`${routes.category}${slug}?page=${
-              page + 1
+              parseInt(page) + 1
             }&order_by=${orderBy}`}
           >
             <Button variant="default">{">"}</Button>
           </LinkText>
-        ) : (
-          <Button variant="default" disabled>
-            {">"}
-          </Button>
-        );
+        ) : null;
 
       case "prev":
         return page != 1 ? (
           <LinkText
             href={`${routes.category}${slug}?page=${
-              page - 1
+              parseInt(page) - 1
             }&order_by=${orderBy}`}
           >
             <Button variant="default">{"<"}</Button>
           </LinkText>
-        ) : (
-          <Button variant="default" disabled>
-            {"<"}
-          </Button>
-        );
+        ) : null;
       case "first":
         return page != 1 ? (
           <LinkText

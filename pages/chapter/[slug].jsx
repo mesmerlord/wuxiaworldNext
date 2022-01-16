@@ -6,9 +6,10 @@ import DisqusComments from "../../components/common/DisqusComments";
 import useInView from "react-cool-inview";
 import { Container } from "@mantine/core";
 import dynamic from "next/dynamic";
-import BackgroundLoading from "../../components/Background/BackgroundLoading";
 import ChapterView from "../../components/PageSpecific/Chapter/ChapterView";
 import { dehydrate, QueryClient } from "react-query";
+import { routes } from "../../components/utils/Routes.js";
+import Seo from "../../components/common/Seo";
 
 // const ChapterView = dynamic(
 //   () => import("../../components/PageSpecific/Chapter/ChapterView"),
@@ -51,21 +52,19 @@ const Chapter = (props) => {
 
   return (
     <>
-      {/* <Script
+      <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5752282235723884"
         crossorigin="anonymous"
-      /> */}
-      {/* <Seo
-        description={`You're reading ${chapterData.title} - ${chapterData.novelParentName} for free on ${siteUrl}, continue reading `}
-        url={`${siteUrl}${routes.chapter}${chapterData.novelParent}-${chapterData.index}`}
-        title={`${chapterData.title} - Read at Wuxiaworld EU`}
+      />
+      <Seo
+        description={`You're reading ${data?.title} - ${data?.novelParentName} for free on ${siteUrl}, continue reading `}
+        url={`${siteUrl}${routes.chapter}${data?.novelParent}-${data?.index}`}
+        title={`${data?.title} - Read at Wuxiaworld EU`}
         image={""}
         loading={false}
-      /> */}
-
+      />
       <ChapterView chapterSlug={slug} />
-
       <Container sx={{ maxWidth: "700px", position: "relative" }}>
         <Container size="md" ref={observe}>
           {inView && <DisqusComments slug={`${slug}`} />}

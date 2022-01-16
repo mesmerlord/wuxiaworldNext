@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import React, { useEffect } from "react";
 import Link from 'next/link'
+import { routes } from "../utils/Routes";
 const NewBookCard = ({
   bookName,
   imageLink,
@@ -24,7 +25,7 @@ const NewBookCard = ({
       {!loading ? (
         
         <Link 
-        href={`novel/${slug}`}><a style = {{textDecoration:"none"}}><Card
+        href={`${routes.novel}${slug}`}><a style = {{textDecoration:"none"}}><Card
           shadow="sm"
           padding="md"
           sx={{

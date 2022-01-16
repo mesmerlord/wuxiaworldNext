@@ -7,13 +7,18 @@ import { useRouter } from "next/router";
 import { routes } from "../utils/Routes";
 import LinkText from "../common/LinkText";
 import { useStore } from "../Store/StoreProvider";
+import { useEffect } from "react";
 
 const Sidebar = ({ opened, setOpened }) => {
   // const history = useHistory();
   const accessToken = useStore((state) => state.accessToken);
   const logOut = useStore((state) => state.logOut);
   const router = useRouter();
-
+  useEffect(() => {
+    router.events.on("routeChangeComplete", () => {
+      setOpened(false);
+    });
+  }, [router]);
   return (
     <Drawer
       opened={opened}
@@ -101,19 +106,17 @@ const Sidebar = ({ opened, setOpened }) => {
           </LinkText>
         </Accordion.Item>
       </Accordion>
-
-      <Button
-        size="md"
-        onClick={() => {
-          router.push(`${routes.search} `);
-        }}
-        // compact={true}
-        leftIcon={<SearchIcon />}
-        fullWidth
-      >
-        Search
-      </Button>
-      {!accessToken ? (
+      <LinkText to={`${routes.search}`}>
+        <Button
+          size="md"
+          // compact={true}
+          leftIcon={<SearchIcon />}
+          fullWidth
+        >
+          Search
+        </Button>
+      </LinkText>
+      {/* {!accessToken ? (
         <Button
           onClick={() => history.push(`${routes.login}`)}
           leftIcon={<LoginIcon />}
@@ -131,7 +134,7 @@ const Sidebar = ({ opened, setOpened }) => {
         >
           Log Out
         </Button>
-      )}
+      )} */}
     </Drawer>
   );
 };

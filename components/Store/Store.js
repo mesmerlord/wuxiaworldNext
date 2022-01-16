@@ -4,6 +4,7 @@ import create from "zustand";
 let store;
 
 const initialState = {
+  isAnimating: false,
   lastUpdate: 0,
   darkMode: false,
   count: 0,
@@ -35,7 +36,7 @@ function initStore(preloadedState = initialState) {
   return create((set, get) => ({
     ...initialState,
     ...preloadedState,
-
+    setIsAnimating: (isAnimating) => set(() => ({ isAnimating })),
     changeSettings: (params) => {
       const loggedIn = get().accessToken;
       const settings = get().settings;

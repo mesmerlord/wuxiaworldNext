@@ -10,7 +10,7 @@ export const routes = {
   login: "/user/login/",
   signup: "/user/signup/",
   readingList: "/user/reading-list/",
-  search: "/search/query=",
+  search: "/search/",
   profile: "/user/profile/",
   profileView: "/user/profile/view",
   bookmark: "/user/profile/bookmark",

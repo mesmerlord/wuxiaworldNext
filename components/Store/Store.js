@@ -28,8 +28,8 @@ const initialState = {
       : true,
   fontSize:
     typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("font-size")) || 18
-      : 18,
+      ? JSON.parse(localStorage.getItem("font-size")) || 21
+      : 21,
 };
 
 function initStore(preloadedState = initialState) {

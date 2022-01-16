@@ -43,6 +43,8 @@ const ChapterView = ({ chapterSlug }) => {
   const { data } = useChapter(chapterSlug);
 
   useEffect(() => {
+    scrollTo({ x: 0, y: 0 });
+
     if (data?.nextChap) {
       queryClient.prefetchQuery(
         ["chapterFetch", `${data?.novelParent}-${data?.nextChap}`],

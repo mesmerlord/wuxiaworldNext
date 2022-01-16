@@ -26,6 +26,8 @@ const App = (props: AppProps) => {
   }, []);
   useEffect(() => {
     const handleRouteChangeStart = () => {
+      ReactGA.send({ hitType: "pageview", page: router.pathname });
+
       setState((prevState) => ({
         ...prevState,
         isRouteChanging: true,
@@ -34,7 +36,6 @@ const App = (props: AppProps) => {
     };
 
     const handleRouteChangeEnd = () => {
-      ReactGA.send("pageview");
       setState((prevState) => ({
         ...prevState,
         isRouteChanging: false,

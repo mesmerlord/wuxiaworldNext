@@ -7,9 +7,8 @@ import Navbar from "../components/Navbar/Navbar";
 import Background from "../components/Background/Background";
 import Footer from "../components/Footer/Footer";
 import { useRouter } from "next/router";
-import { NProgress } from "@tanem/react-nprogress";
-import { Progress } from "@mantine/core";
 import Loading from "../components/common/Loading";
+import ReactGA from "react-ga4";
 
 const App = (props: AppProps) => {
   const { Component, pageProps } = props;
@@ -49,6 +48,12 @@ const App = (props: AppProps) => {
       router.events.off("routeChangeError", handleRouteChangeEnd);
     };
   }, [router.events]);
+  useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_ANALYTICS_CODE);
+  }, []);
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: router.pathname });
+  }, [router.pathname]);
   return (
     <StoreProvider store={store}>
       <QueryClientProvider client={queryClient}>

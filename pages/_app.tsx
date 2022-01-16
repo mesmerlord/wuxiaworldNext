@@ -23,6 +23,7 @@ const App = (props: AppProps) => {
   });
   useEffect(() => {
     ReactGA.initialize(process.env.NEXT_PUBLIC_ANALYTICS_CODE);
+    ReactGA.send({ hitType: "pageview", page: router.pathname });
   }, []);
   useEffect(() => {
     const handleRouteChangeStart = () => {

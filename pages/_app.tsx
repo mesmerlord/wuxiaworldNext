@@ -21,7 +21,9 @@ const App = (props: AppProps) => {
     isRouteChanging: false,
     loadingKey: 0,
   });
-
+  useEffect(() => {
+    ReactGA.initialize(process.env.NEXT_PUBLIC_ANALYTICS_CODE);
+  }, []);
   useEffect(() => {
     const handleRouteChangeStart = () => {
       setState((prevState) => ({
@@ -32,6 +34,7 @@ const App = (props: AppProps) => {
     };
 
     const handleRouteChangeEnd = () => {
+      ReactGA.send("pageview");
       setState((prevState) => ({
         ...prevState,
         isRouteChanging: false,
@@ -48,12 +51,7 @@ const App = (props: AppProps) => {
       router.events.off("routeChangeError", handleRouteChangeEnd);
     };
   }, [router.events]);
-  useEffect(() => {
-    ReactGA.initialize(process.env.NEXT_PUBLIC_ANALYTICS_CODE);
-  }, []);
-  useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: router.pathname });
-  }, [router.pathname]);
+
   return (
     <StoreProvider store={store}>
       <QueryClientProvider client={queryClient}>

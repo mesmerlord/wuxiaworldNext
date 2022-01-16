@@ -49,7 +49,7 @@ const App = (props: AppProps) => {
     };
   }, [router.events]);
   useEffect(() => {
-    ReactGA.initialize(process.env.REACT_APP_ANALYTICS_CODE);
+    ReactGA.initialize(process.env.NEXT_PUBLIC_ANALYTICS_CODE);
   }, []);
   useEffect(() => {
     ReactGA.send({ hitType: "pageview", page: router.pathname });

@@ -9,10 +9,9 @@ import Seo from "../components/common/Seo";
 import { useStore } from "../components/Store/StoreProvider";
 import TopBox from "../components/common/TopBox";
 
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
 const RecentlyUpdated = dynamic(
   () => import("../components/common/RecentlyUpdated.js"),
-  { loading: () => <BackgroundLoading /> }
+  { ssr: false, loading: () => <BackgroundLoading /> }
 );
 
 const getAbsoluteURL = (path) => {

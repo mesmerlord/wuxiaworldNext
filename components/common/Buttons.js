@@ -70,6 +70,7 @@ const Buttons = ({ novelParent, nextChapter, prevChapter, chapterIndex }) => {
             ? `${routes.chapter}${novelParent}-${prevChapter}`
             : `${routes.novel}${novelParent}`
         }
+        refresh={true}
       >
         <Button id="previousChapter">
           {!phone ? (prevChapter ? "Previous Chapter" : "Novel Info") : "<"}
@@ -87,6 +88,7 @@ const Buttons = ({ novelParent, nextChapter, prevChapter, chapterIndex }) => {
             ? `${routes.chapter}${novelParent}-${nextChapter}`
             : `${routes.novel}${novelParent}`
         }
+        refresh={true}
       >
         <Button id="nextChapter" disabled={nextChapter ? false : true}>
           {!phone ? (nextChapter ? "Next Chapter" : "Novel Info") : ">"}

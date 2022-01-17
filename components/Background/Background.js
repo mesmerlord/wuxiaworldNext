@@ -2,18 +2,15 @@ import { Paper } from "@mantine/core";
 import { useStore } from "../Store/StoreProvider";
 import { MantineProvider, NormalizeCSS, GlobalStyles } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-
-export function getServerSideProps() {
-  const zustandStore = initializeStore();
-
-  return {
-    props: { initialZustandState: JSON.stringify(zustandStore.getState()) },
-  };
-}
+import { useEffect } from "react";
 
 const Background = (props) => {
-  const { darkMode } = useStore();
+  const darkMode = useStore((state) => state.darkMode);
+  const loadFromLocalStorage = useStore((state) => state.loadFromLocalStorage);
 
+  useEffect(() => {
+    loadFromLocalStorage();
+  }, []);
   return (
     <MantineProvider
       theme={{

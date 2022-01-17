@@ -10,7 +10,6 @@ const Navbar = () => {
   const [scroll, scrollTo] = useWindowScroll();
 
   const [sticky, setSticky] = useState(false);
-  const loadFromLocalStorage = useStore((state) => state.loadFromLocalStorage);
 
   useEffect(() => {
     if (scroll.y > 10) {
@@ -20,9 +19,6 @@ const Navbar = () => {
       setSticky(false);
     }
   }, [scroll]);
-  useEffect(() => {
-    loadFromLocalStorage();
-  }, []);
 
   return (
     <Paper

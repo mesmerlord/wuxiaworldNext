@@ -1,9 +1,17 @@
 import Link from "next/link";
-const LinkText = ({ href, ...props }) => {
+const LinkText = ({ href, refresh = false, ...props }) => {
   return (
-    <Link href={href || props.to}>
-      <a style={{ textDecoration: "none" }}>{props.children}</a>
-    </Link>
+    <>
+      {refresh ? (
+        <a href={href || props.to} style={{ textDecoration: "none" }}>
+          {props.children}
+        </a>
+      ) : (
+        <Link href={href || props.to}>
+          <a style={{ textDecoration: "none" }}>{props.children}</a>
+        </Link>
+      )}
+    </>
   );
 };
 export default LinkText;

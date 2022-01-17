@@ -27,7 +27,7 @@ function initStore(preloadedState = initialState) {
     loadFromLocalStorage: () => {
       set(() => ({
         fontSize: parseInt(JSON.parse(localStorage.getItem("font-size"))) || 21,
-        darkMode: JSON.parse(localStorage.getItem("dark-mode")) || true,
+        darkMode: JSON.parse(localStorage.getItem("dark-mode")),
         settings: JSON.parse(localStorage.getItem("settings")) || {
           darkMode: true,
         },

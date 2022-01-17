@@ -16,7 +16,7 @@ const GoogleAdMobile = ({ pageParam, adNum }) => {
         pushAd();
         clearInterval(interval);
       }
-    }, 300);
+    }, 50);
 
     return () => {
       clearInterval(interval);

@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { apiHome } from "../../utils/siteName.js";
 import { useWindowScroll } from "@mantine/hooks";
@@ -14,7 +14,7 @@ import {
   Affix,
   Transition,
 } from "@mantine/core";
-import { useQuery, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import Background from "../../Background/Background.js";
 import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
 // import GoogleAd from "../../components/common/GoogleAd.js";
@@ -23,9 +23,7 @@ import BackgroundLoading from "../../Background/BackgroundLoading.js";
 import ReactGA from "react-ga";
 import Buttons from "../../common/Buttons.js";
 import GoogleAdSmall from "../../common/GoogleAdSmall.js";
-import Seo from "../../common/Seo.js";
 import GoogleAdMobile from "../../common/GoogleAdMobile.js";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useStore } from "../../Store/StoreProvider.js";
 import LinkText from "../../common/LinkText.js";
@@ -128,6 +126,8 @@ const ChapterView = ({ chapterSlug }) => {
                   {data.title}
                 </Title>
               </Center>
+              <br />
+              <GoogleAdMobile pageParam={chapterSlug} adNum={100} />
               <br />
 
               <Buttons

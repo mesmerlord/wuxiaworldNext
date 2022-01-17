@@ -60,7 +60,7 @@ const Chapter = (props) => {
       <Seo
         description={`You're reading ${data?.title} - ${data?.novelParentName} for free on ${siteUrl}, continue reading `}
         url={`${siteUrl}${routes.chapter}${data?.novelParent}-${data?.index}`}
-        title={`${data?.title} - Read at Wuxiaworld EU`}
+        title={`${data?.title} : ${data?.novelParentName} - Read at Wuxiaworld EU`}
         image={""}
         loading={false}
       />

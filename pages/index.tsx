@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import BackgroundLoading from "../components/Background/BackgroundLoading";
 import Seo from "../components/common/Seo";
 import { useStore } from "../components/Store/StoreProvider";
+import TopBox from "../components/common/TopBox";
 
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME;
 const RecentlyUpdated = dynamic(
@@ -46,7 +47,7 @@ export default function HomePage({ dehydratedState }) {
         image={""}
         loading={false}
       />
-
+      <TopBox />
       <Container>
         {data?.map((category: any) => (
           <Sections

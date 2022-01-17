@@ -46,7 +46,9 @@ export default function HomePage({ dehydratedState }) {
         image={""}
         loading={false}
       />
-      <TopBox />
+      <Container sx={{ marginTop: "20px" }}>
+        <TopBox />
+      </Container>
       <Container>
         {data?.map((category: any) => (
           <Sections

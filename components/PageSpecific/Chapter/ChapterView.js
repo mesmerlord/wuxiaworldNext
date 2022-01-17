@@ -93,10 +93,10 @@ const ChapterView = ({ chapterSlug }) => {
       >
         {text}
       </Text>
-      {index % 15 == 0 && !phone && (
+      {index % 17 == 0 && !phone && index != 0 && (
         <GoogleAdSmall pageParam={chapterSlug} adNum={index} />
       )}
-      {index % 12 == 0 && phone && (
+      {index % 15 == 0 && phone && index != 0 && (
         <GoogleAdMobile pageParam={chapterSlug} adNum={index} />
       )}
     </div>

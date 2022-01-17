@@ -20,7 +20,9 @@ import dynamic from "next/dynamic";
 
 // const TagBadges = lazy(() => import("./TagSection"));
 // const CategorySection = lazy(() => import("./CategorySection"));
-const ChapterBox = dynamic(() => import("./ChapterBox"));
+const ChapterBox = dynamic(() => import("./ChapterBox"), {
+  ssr: false,
+});
 
 const MobileDetail = ({
   novelData,

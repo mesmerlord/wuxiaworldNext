@@ -10,11 +10,17 @@ import Seo from "../../components/common/Seo.js";
 import { routes } from "../../components/utils/Routes";
 import { useStore } from "../../components/Store/StoreProvider";
 
-const DisqusComments = dynamic(() =>
-  import("../../components/common/DisqusComments")
+const DisqusComments = dynamic(
+  () => import("../../components/common/DisqusComments"),
+  {
+    ssr: false,
+  }
 );
-const Recommendations = dynamic(() =>
-  import("../../components/PageSpecific/NovelDetail/Recommendations")
+const Recommendations = dynamic(
+  () => import("../../components/PageSpecific/NovelDetail/Recommendations"),
+  {
+    ssr: false,
+  }
 );
 
 const SSR = typeof window === "undefined";

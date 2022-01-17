@@ -39,4 +39,4 @@ const GoogleAdMobile = ({ pageParam, adNum }) => {
     />
   );
 };
-export default GoogleAdMobile;
+export default React.memo(GoogleAdMobile);

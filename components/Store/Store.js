@@ -6,7 +6,7 @@ let store;
 const initialState = {
   isAnimating: false,
   lastUpdate: 0,
-  darkMode: false,
+  darkMode: true,
   count: 0,
   siteName: process.env.NEXT_PUBLIC_SITE_NAME,
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
@@ -14,28 +14,26 @@ const initialState = {
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("token"))
       : null,
-  userInfo:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("user-info"))
-      : null,
-  settings:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("settings"))
-      : { darkMode: true },
-  darkMode:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("dark-mode")) || true
-      : true,
-  fontSize:
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("font-size")) || 21
-      : 21,
+  userInfo: null,
+  settings: { darkMode: true },
+
+  fontSize: 21,
 };
 
 function initStore(preloadedState = initialState) {
   return create((set, get) => ({
     ...initialState,
     ...preloadedState,
+    loadFromLocalStorage: () => {
+      set(() => ({
+        fontSize: parseInt(JSON.parse(localStorage.getItem("font-size"))) || 21,
+        darkMode: JSON.parse(localStorage.getItem("dark-mode")) || true,
+        settings: JSON.parse(localStorage.getItem("settings")) || {
+          darkMode: true,
+        },
+        userInfo: JSON.parse(localStorage.getItem("user-info")),
+      }));
+    },
     setIsAnimating: (isAnimating) => set(() => ({ isAnimating })),
     changeSettings: (params) => {
       const loggedIn = get().accessToken;

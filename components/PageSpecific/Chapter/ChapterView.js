@@ -30,20 +30,19 @@ import LinkText from "../../common/LinkText.js";
 import { routes } from "../../utils/Routes.js";
 import { useChapter, chapterFetch } from "../../hooks/useChapter.js";
 import GoogleAdText from "../../common/GoogleAdText.js";
-
+import ScrollUpButton from "./ScrollToTop.js";
+let render = 0;
 const ChapterView = ({ chapterSlug }) => {
   const router = useRouter();
-  const [scroll, scrollTo] = useWindowScroll();
   const queryClient = useQueryClient();
   const accessToken = useStore((state) => state.accessToken);
   const changeSettings = useStore((state) => state.changeSettings);
   const fontSize = useStore((state) => state.fontSize);
   const phone = useMediaQuery("(max-width: 1024px)");
   const { data } = useChapter(chapterSlug);
+  console.log(`Rendered ${render++}`);
 
   useEffect(() => {
-    scrollTo({ x: 0, y: 0 });
-
     if (data?.nextChap) {
       queryClient.prefetchQuery(
         ["chapterFetch", `${data?.novelParent}-${data?.nextChap}`],
@@ -98,7 +97,11 @@ const ChapterView = ({ chapterSlug }) => {
         <GoogleAdText pageParam={chapterSlug} adNum={index} />
       )}
       {index % 15 == 0 && phone && index != 0 && (
-        <GoogleAdText pageParam={chapterSlug} adNum={index} />
+        <GoogleAdText
+          pageParam={chapterSlug}
+          adNum={index}
+          addedStyles={{ width: "320px", height: "100px" }}
+        />
       )}
     </div>
   ));
@@ -128,7 +131,11 @@ const ChapterView = ({ chapterSlug }) => {
                 </Title>
               </Center>
               <br />
-              <GoogleAdSmall pageParam={chapterSlug} adNum={100} />
+              <GoogleAdSmall
+                pageParam={chapterSlug}
+                adNum={100}
+                addedStyles={{ width: "320px", height: "50px" }}
+              />
               <br />
 
               <Buttons
@@ -173,7 +180,7 @@ const ChapterView = ({ chapterSlug }) => {
                 >
                   A-
                 </Button>
-                {data && (
+                {/* {data && (
                   <Button
                     onClick={addBookmark}
                     size="xs"
@@ -181,7 +188,7 @@ const ChapterView = ({ chapterSlug }) => {
                   >
                     Mark Read
                   </Button>
-                )}
+                )} */}
               </Group>
             </div>
             {!data?.text ? (
@@ -207,15 +214,7 @@ const ChapterView = ({ chapterSlug }) => {
           </>
         )}
       </Container>
-      <Affix position={{ bottom: 20, right: 20 }}>
-        <Transition transition="slide-up" mounted={scroll.y > 0}>
-          {(transitionStyles) => (
-            <Button style={transitionStyles} onClick={() => scrollTo({ y: 0 })}>
-              ↑
-            </Button>
-          )}
-        </Transition>
-      </Affix>
+      <ScrollUpButton />
 
       <br />
 

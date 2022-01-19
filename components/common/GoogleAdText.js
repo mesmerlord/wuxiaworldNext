@@ -24,19 +24,18 @@ const GoogleAdText = ({ pageParam, adNum, addedStyles }) => {
   }, []);
 
   return (
-    <ins
-      className={`adsbygoogle`}
-      style={{
-        display: "block",
-        textAlign: "center",
-        ...addedStyles,
-      }}
-      data-ad-client="ca-pub-5752282235723884"
-      data-ad-slot="2802361965"
-      data-ad-format="fluid"
-      data-full-width-responsive="true"
-      key={`text-add-${pageParam}-${adNum}`}
-    />
+    <div style={addedStyles}>
+      <ins
+        className={`adsbygoogle`}
+        style={{
+          display: "block",
+          textAlign: "center",
+        }}
+        data-ad-client="ca-pub-5752282235723884"
+        data-ad-slot="2802361965"
+        key={`text-add-${pageParam}-${adNum}`}
+      />
+    </div>
   );
 };
 export default React.memo(GoogleAdText);

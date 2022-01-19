@@ -28,7 +28,8 @@ const GoogleAdSmall = ({ pageParam, adNum, addedStyles }) => {
       <ins
         className={`adsbygoogle`}
         style={{
-          display: "block",
+          display: "inline-block",
+          ...addedStyles,
         }}
         data-ad-client="ca-pub-5752282235723884"
         data-ad-slot="1866634958"

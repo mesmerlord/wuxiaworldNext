@@ -97,10 +97,10 @@ const ChapterView = ({ chapterSlug }) => {
         <GoogleAdText pageParam={chapterSlug} adNum={index} />
       )}
       {index % 15 == 0 && phone && index != 0 && (
-        <GoogleAdText
+        <GoogleAdSmall
           pageParam={chapterSlug}
           adNum={index}
-          addedStyles={{ width: "320px", height: "100px" }}
+          addedStyles={{ width: "300px", height: "100px" }}
         />
       )}
     </div>

@@ -24,18 +24,16 @@ const GoogleAdSmall = ({ pageParam, adNum, addedStyles }) => {
   }, []);
 
   return (
-    <div>
-      <ins
-        className={`adsbygoogle`}
-        style={{
-          display: "inline-block",
-          ...addedStyles,
-        }}
-        data-ad-client="ca-pub-5752282235723884"
-        data-ad-slot="1866634958"
-        key={`small-add-${pageParam}-${adNum}`}
-      />
-    </div>
+    <ins
+      className={`adsbygoogle`}
+      style={{
+        display: "inline-block",
+        ...addedStyles,
+      }}
+      data-ad-client="ca-pub-5752282235723884"
+      data-ad-slot="1866634958"
+      key={`small-add-${pageParam}-${adNum}`}
+    />
   );
 };
 export default React.memo(GoogleAdSmall);

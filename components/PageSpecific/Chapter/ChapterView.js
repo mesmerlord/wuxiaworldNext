@@ -29,6 +29,7 @@ import { useStore } from "../../Store/StoreProvider.js";
 import LinkText from "../../common/LinkText.js";
 import { routes } from "../../utils/Routes.js";
 import { useChapter, chapterFetch } from "../../hooks/useChapter.js";
+import GoogleAdText from "../../common/GoogleAdText.js";
 
 const ChapterView = ({ chapterSlug }) => {
   const router = useRouter();
@@ -94,10 +95,10 @@ const ChapterView = ({ chapterSlug }) => {
         {text}
       </Text>
       {index % 17 == 0 && !phone && index != 0 && (
-        <GoogleAdSmall pageParam={chapterSlug} adNum={index} />
+        <GoogleAdText pageParam={chapterSlug} adNum={index} />
       )}
       {index % 15 == 0 && phone && index != 0 && (
-        <GoogleAdMobile pageParam={chapterSlug} adNum={index} />
+        <GoogleAdText pageParam={chapterSlug} adNum={index} />
       )}
     </div>
   ));
@@ -127,7 +128,7 @@ const ChapterView = ({ chapterSlug }) => {
                 </Title>
               </Center>
               <br />
-              <GoogleAdMobile pageParam={chapterSlug} adNum={100} />
+              <GoogleAdSmall pageParam={chapterSlug} adNum={100} />
               <br />
 
               <Buttons

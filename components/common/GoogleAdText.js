@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const GoogleAdMobile = ({ pageParam, adNum }) => {
+const GoogleAdText = ({ pageParam, adNum, addedStyles }) => {
   useEffect(() => {
     const pushAd = () => {
       try {
@@ -26,15 +26,17 @@ const GoogleAdMobile = ({ pageParam, adNum }) => {
   return (
     <ins
       className={`adsbygoogle`}
-      data-ad-client="ca-pub-5752282235723884"
-      data-ad-slot="1980500813"
-      data-ad-format="fluid"
-      data-ad-layout="in-article"
-      key={`small-add-${pageParam}-${adNum}`}
       style={{
         display: "block",
+        textAlign: "center",
+        ...addedStyles,
       }}
+      data-ad-client="ca-pub-5752282235723884"
+      data-ad-slot="2802361965"
+      data-ad-format="fluid"
+      data-full-width-responsive="true"
+      key={`text-add-${pageParam}-${adNum}`}
     />
   );
 };
-export default React.memo(GoogleAdMobile);
+export default React.memo(GoogleAdText);

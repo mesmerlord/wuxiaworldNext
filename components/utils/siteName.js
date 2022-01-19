@@ -1,12 +1,6 @@
-export const localMode = true;
 var apiUrl;
 var apiHome;
-if (localMode) {
-  apiHome = 'https://wuxianovels.co/api';
-  apiUrl = 'https://wuxianovels.co';
-} else {
-  apiHome = 'http://localhost:8000/api';
-  apiUrl = 'http://localhost:8000';
-}
+apiHome = process.env.NEXT_PUBLIC_API_HOME;
+apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export var apiHome;
 export var apiUrl;

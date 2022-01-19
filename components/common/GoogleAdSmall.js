@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const GoogleAdSmall = ({ pageParam, adNum }) => {
+const GoogleAdSmall = ({ pageParam, adNum, addedStyles }) => {
   useEffect(() => {
     const pushAd = () => {
       try {
@@ -28,6 +28,7 @@ const GoogleAdSmall = ({ pageParam, adNum }) => {
       className={`adsbygoogle`}
       style={{
         display: "block",
+        ...addedStyles,
       }}
       data-ad-client="ca-pub-5752282235723884"
       data-ad-slot="1866634958"

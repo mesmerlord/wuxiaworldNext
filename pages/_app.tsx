@@ -9,9 +9,13 @@ import Footer from "../components/Footer/Footer";
 import { useRouter } from "next/router";
 import Loading from "../components/common/Loading";
 import ReactGA from "react-ga4";
+import { SessionProvider } from "next-auth/react";
 
 const App = (props: AppProps) => {
-  const { Component, pageProps } = props;
+  const {
+    Component,
+    pageProps: { session, ...pageProps },
+  } = props;
   const store = useHydrate(pageProps.initialZustandState);
   const [queryClient] = React.useState(() => new QueryClient());
   const getLayout = Component.getLayout || ((page) => page);
@@ -54,22 +58,24 @@ const App = (props: AppProps) => {
   }, [router.events]);
 
   return (
-    <StoreProvider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Background>
-            <Loading
-              isRouteChanging={state.isRouteChanging}
-              key={state.loadingKey}
-            />
-            <Navbar />
+    <SessionProvider session={session}>
+      <StoreProvider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Background>
+              <Loading
+                isRouteChanging={state.isRouteChanging}
+                key={state.loadingKey}
+              />
+              <Navbar />
 
-            <Component {...pageProps} />
-            <Footer />
-          </Background>
-        </Hydrate>
-      </QueryClientProvider>
-    </StoreProvider>
+              <Component {...pageProps} />
+              <Footer />
+            </Background>
+          </Hydrate>
+        </QueryClientProvider>
+      </StoreProvider>
+    </SessionProvider>
   );
 };
 export default App;

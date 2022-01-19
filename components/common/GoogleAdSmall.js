@@ -24,7 +24,7 @@ const GoogleAdSmall = ({ pageParam, adNum, addedStyles }) => {
   }, []);
 
   return (
-    <div style={addedStyles}>
+    <div>
       <ins
         className={`adsbygoogle`}
         style={{

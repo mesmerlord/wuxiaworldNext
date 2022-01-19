@@ -134,7 +134,7 @@ const ChapterView = ({ chapterSlug }) => {
               <GoogleAdSmall
                 pageParam={chapterSlug}
                 adNum={100}
-                addedStyles={{ width: "320px", height: "50px" }}
+                addedStyles={{ width: "320px", height: "100px" }}
               />
               <br />
 
@@ -201,7 +201,11 @@ const ChapterView = ({ chapterSlug }) => {
           </Paper>
         </div>
         <br />
-
+        <GoogleAdSmall
+          pageParam={chapterSlug}
+          adNum={101}
+          addedStyles={{ width: "320px", height: "100px" }}
+        />
         {data && (
           <>
             <Buttons

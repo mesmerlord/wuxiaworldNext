@@ -21,6 +21,13 @@ const App = (props: AppProps) => {
   const getLayout = Component.getLayout || ((page) => page);
   const router = useRouter();
 
+  const ONE_DAY_SECONDS = 60 * 60 * 24;
+
+  pageProps.ctx.res?.setHeader(
+    "Cache-Control",
+    `s-maxage=1, stale-while-revalidate=${ONE_DAY_SECONDS}`
+  );
+
   const [state, setState] = useState({
     isRouteChanging: false,
     loadingKey: 0,
@@ -28,6 +35,7 @@ const App = (props: AppProps) => {
   useEffect(() => {
     ReactGA.initialize(process.env.NEXT_PUBLIC_ANALYTICS_CODE);
   }, []);
+
   useEffect(() => {
     const handleRouteChangeStart = () => {
       ReactGA.send({ hitType: "pageview", page: router.pathname });

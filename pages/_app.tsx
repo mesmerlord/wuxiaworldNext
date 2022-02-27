@@ -23,7 +23,7 @@ const App = (props: AppProps) => {
 
   const ONE_DAY_SECONDS = 60 * 60 * 24;
 
-  pageProps.ctx.res?.setHeader(
+  pageProps.res?.setHeader(
     "Cache-Control",
     `s-maxage=1, stale-while-revalidate=${ONE_DAY_SECONDS}`
   );

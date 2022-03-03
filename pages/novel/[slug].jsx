@@ -9,7 +9,9 @@ import useInView from "react-cool-inview";
 import Seo from "../../components/common/Seo.js";
 import { routes } from "../../components/utils/Routes";
 import { useStore } from "../../components/Store/StoreProvider";
-
+import { useEffect } from "react";
+// import { getSession, useSession } from "next-auth/react";
+import axios from "axios";
 const DisqusComments = dynamic(
   () => import("../../components/common/DisqusComments"),
   {
@@ -25,7 +27,29 @@ const Recommendations = dynamic(
 
 const SSR = typeof window === "undefined";
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  let urls = [];
+  let first_url = await axios.get("https://wuxianovels.co/api/novels/");
+  let has_next = true;
+  while (has_next) {
+    if (!first_url.data.next) {
+      has_next = false;
+    }
+    let temp_urls = first_url.data.results.map((item) => {
+      const value = { params: { slug: item.slug } };
+      return value;
+    });
+    urls = [...temp_urls, ...urls];
+    first_url = await axios.get(first_url.data.next);
+  }
+
+  return {
+    paths: [...urls],
+    fallback: true, // false or 'blocking'
+  };
+}
+
+export async function getStaticProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
@@ -35,8 +59,32 @@ export async function getServerSideProps(context) {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 60 * 60 * 48,
   };
 }
+
+// export async function getServerSideProps(context) {
+//   // const { req } = context;
+//   const { slug } = context.params;
+
+//   // const session = await getSession({ req });
+//   // if (session) {
+//   //   axios.defaults.headers.common[
+//   //     "Authorization"
+//   //   ] = `Token ${session.user.accessToken}`;
+//   // }
+
+//   const queryClient = new QueryClient();
+//   await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
+//     staleTime: Infinity,
+//   });
+//   // console.log(dehydrate(queryClient));
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// }
 
 const NovelDetail = (props) => {
   const router = useRouter();

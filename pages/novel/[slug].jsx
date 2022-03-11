@@ -34,7 +34,7 @@ export async function getStaticPaths() {
   const response = await axios.get("https://wuxianovels.co/api/admin-novels/", {
     headers,
   });
-  const urls = response.data.map((item) => {
+  const urls = response.data.slice(0, 1000).map((item) => {
     const value = { params: { slug: item.slug } };
     return value;
   });

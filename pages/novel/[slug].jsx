@@ -28,21 +28,16 @@ const Recommendations = dynamic(
 const SSR = typeof window === "undefined";
 
 export async function getStaticPaths() {
-  let urls = [];
-  let first_url = await axios.get("https://wuxianovels.co/api/novels/");
-  let has_next = true;
-  while (has_next) {
-    if (!first_url.data.next) {
-      has_next = false;
-    }
-    let temp_urls = first_url.data.results.map((item) => {
-      const value = { params: { slug: item.slug } };
-      return value;
-    });
-    urls = [...temp_urls, ...urls];
-    first_url = await axios.get(first_url.data.next);
-  }
-
+  const headers = {
+    Authorization: `Token ${process.env.ADMIN_TOKEN}`,
+  };
+  const response = await axios.get("https://wuxianovels.co/api/admin-novels/", {
+    headers,
+  });
+  const urls = response.data.map((item) => {
+    const value = { params: { slug: item.slug } };
+    return value;
+  });
   return {
     paths: [...urls],
     fallback: true, // false or 'blocking'

@@ -9,5 +9,5 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  staticPageGenerationTimeout: 10000000,
+  staticPageGenerationTimeout: 100000,
 };

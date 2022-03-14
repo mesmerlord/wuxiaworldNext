@@ -9,7 +9,6 @@ import useInView from "react-cool-inview";
 import Seo from "../../components/common/Seo.js";
 import { routes } from "../../components/utils/Routes";
 import { useStore } from "../../components/Store/StoreProvider";
-import { useEffect } from "react";
 // import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 const DisqusComments = dynamic(
@@ -31,10 +30,13 @@ export async function getStaticPaths() {
   const headers = {
     Authorization: `Token ${process.env.ADMIN_TOKEN}`,
   };
-  const response = await axios.get("https://wuxianovels.co/api/admin-novels/", {
-    headers,
-  });
-  const urls = response.data.slice(0, 1000).map((item) => {
+  const response = await axios.get(
+    "https://wuxia.click/api/admin-novels/?order=-total_views",
+    {
+      headers,
+    }
+  );
+  const urls = response.data.slice(0, 3000).map((item) => {
     const value = { params: { slug: item.slug } };
     return value;
   });

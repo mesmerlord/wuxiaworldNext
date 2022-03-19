@@ -62,7 +62,7 @@ export async function getStaticProps(context) {
       .catch((error) => error);
   };
   await queryClient.prefetchQuery(
-    ["get_recommendations", slug],
+    ["get_recommendations"],
     recommendation_fetch,
     {
       staleTime: Infinity,

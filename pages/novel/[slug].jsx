@@ -36,7 +36,7 @@ export async function getStaticPaths() {
       headers,
     }
   );
-  const urls = response.data.slice(0, 3000).map((item) => {
+  const urls = response.data.slice(0, 2000).map((item) => {
     const value = { params: { slug: item.slug } };
     return value;
   });
@@ -52,6 +52,22 @@ export async function getStaticProps(context) {
   await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
     staleTime: Infinity,
   });
+  const recommendation_fetch = () => {
+    return axios
+      .get(`"https://wuxia.click/api/recommendations/${slug}`)
+      .then((response) => {
+        const res = response.data;
+        return res;
+      })
+      .catch((error) => error);
+  };
+  await queryClient.prefetchQuery(
+    ["get_recommendations", slug],
+    recommendation_fetch,
+    {
+      staleTime: Infinity,
+    }
+  );
   return {
     props: {
       dehydratedState: dehydrate(queryClient),

@@ -2,7 +2,6 @@ import { Container } from "@mantine/core";
 import { dehydrate, QueryClient } from "react-query";
 import Sections from "../components/common/Sections";
 import { novelsFetch, useNovels } from "../components/hooks/useNovels";
-import Head from "next/head";
 import dynamic from "next/dynamic";
 import BackgroundLoading from "../components/Background/BackgroundLoading";
 import Seo from "../components/common/Seo";

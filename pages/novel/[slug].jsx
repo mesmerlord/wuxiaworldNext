@@ -11,6 +11,8 @@ import { routes } from "../../components/utils/Routes";
 import { useStore } from "../../components/Store/StoreProvider";
 // import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
+import { apiHome } from "../../components/utils/siteName";
+
 const DisqusComments = dynamic(
   () => import("../../components/common/DisqusComments"),
   {

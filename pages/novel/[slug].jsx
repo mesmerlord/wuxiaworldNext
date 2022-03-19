@@ -52,14 +52,13 @@ export async function getStaticProps(context) {
   await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
     staleTime: Infinity,
   });
-  const recommendation_fetch = () => {
-    return axios
-      .get(`https://wuxia.click/api/recommendations/${slug}/`)
-      .then((response) => {
-        const res = response.data;
-        return res;
-      })
-      .catch((error) => error);
+  const recommendation_fetch = ({ queryKey }) => {
+    const [_, id] = queryKey;
+    const link = `${apiHome}/recommendations/${id}/`;
+    return axios.get(link).then((response) => {
+      const res = response.data;
+      return res;
+    });
   };
   await queryClient.prefetchQuery(
     ["get_recommendations", slug],

@@ -56,7 +56,7 @@ export async function getStaticProps(context) {
   });
   const recommendation_fetch = ({ queryKey }) => {
     const [_, id] = queryKey;
-    const link = `${apiHome}/recommendations/${id}/`;
+    const link = `${apiHome}/recommendations/${id}`;
     return axios.get(link).then((response) => {
       const res = response.data;
       return res;

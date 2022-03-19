@@ -54,7 +54,7 @@ export async function getStaticProps(context) {
   });
   const recommendation_fetch = () => {
     return axios
-      .get(`https://wuxia.click/api/recommendations/${slug}`)
+      .get(`https://wuxia.click/api/recommendations/${slug}/`)
       .then((response) => {
         const res = response.data;
         return res;

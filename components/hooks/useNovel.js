@@ -6,10 +6,15 @@ import { apiHome } from "../utils/siteName";
 const novelInfoFetch = ({ queryKey }) => {
   const [_, id] = queryKey;
   const link = `${apiHome}/novels/${id}/`;
-  return axios.get(link).then((response) => {
-    const res = response.data;
-    return res;
-  });
+  return axios
+    .get(link)
+    .then((response) => {
+      const res = response.data;
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 const useNovel = (slug) => {
   const notifications = useNotifications();

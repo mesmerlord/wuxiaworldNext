@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiHome } from "../../utils/siteName.js";
-import { useWindowScroll } from "@mantine/hooks";
+// import { useWindowScroll } from "@mantine/hooks";
 import {
   Center,
   Paper,
@@ -11,19 +11,17 @@ import {
   Breadcrumbs,
   Group,
   Title,
-  Affix,
-  Transition,
 } from "@mantine/core";
 import { useQueryClient } from "react-query";
 import Background from "../../Background/Background.js";
-import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
+// import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
 // import GoogleAd from "../../components/common/GoogleAd.js";
 import { useMediaQuery } from "@mantine/hooks";
 import BackgroundLoading from "../../Background/BackgroundLoading.js";
 import ReactGA from "react-ga";
 import Buttons from "../../common/Buttons.js";
 import GoogleAdSmall from "../../common/GoogleAdSmall.js";
-import GoogleAdMobile from "../../common/GoogleAdMobile.js";
+// import GoogleAdMobile from "../../common/GoogleAdMobile.js";
 import { useRouter } from "next/router";
 import { useStore } from "../../Store/StoreProvider.js";
 import LinkText from "../../common/LinkText.js";
@@ -31,7 +29,8 @@ import { routes } from "../../utils/Routes.js";
 import { useChapter, chapterFetch } from "../../hooks/useChapter.js";
 import GoogleAdText from "../../common/GoogleAdText.js";
 import ScrollUpButton from "./ScrollToTop.js";
-let render = 0;
+import { useNotifications } from "@mantine/notifications";
+
 const ChapterView = ({ chapterSlug }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -40,7 +39,9 @@ const ChapterView = ({ chapterSlug }) => {
   const fontSize = useStore((state) => state.fontSize);
   const phone = useMediaQuery("(max-width: 1024px)");
   const { data } = useChapter(chapterSlug);
-  console.log(`Rendered ${render++}`);
+  // const [reportComment, setReportComment] = useState("");
+  const notifications = useNotifications();
+  const [sentReport, setSentReport] = useState(false);
 
   useEffect(() => {
     if (data?.nextChap) {
@@ -60,7 +61,25 @@ const ChapterView = ({ chapterSlug }) => {
       });
     }
   }, [data]);
-
+  const reportChapter = () => {
+    const notifId = notifications.showNotification({
+      title: `Thanks for informing ❤️`,
+      message: `Will take a look and fix.`,
+      autoClose: true,
+    });
+    const details = {
+      title: "Fix Chapter",
+      description: "something wrong here",
+      chapter: data?.id,
+      reported_by: null,
+    };
+    axios
+      .post(`${apiHome}/report/`, details)
+      .then((response) => {
+        setSentReport(true);
+      })
+      .catch((error) => error);
+  };
   const addBookmark = () => {
     if (!chapterSlug) {
       return;
@@ -189,6 +208,16 @@ const ChapterView = ({ chapterSlug }) => {
                     Mark Read
                   </Button>
                 )} */}
+                {data && (
+                  <Button
+                    disabled={sentReport}
+                    onClick={reportChapter}
+                    size="xs"
+                    leftIcon={"!"}
+                  >
+                    Report Chapter
+                  </Button>
+                )}
               </Group>
             </div>
             {!data?.text ? (

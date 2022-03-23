@@ -51,16 +51,22 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery(["novelInfo", slug], novelInfoFetch, {
     staleTime: Infinity,
   });
   const recommendation_fetch = ({ queryKey }) => {
     const [_, id] = queryKey;
     const link = `${apiHome}/recommendations/${id}`;
-    return axios.get(link).then((response) => {
-      const res = response.data;
-      return res;
-    });
+    return axios
+      .get(link)
+      .then((response) => {
+        const res = response.data;
+        return res;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   await queryClient.prefetchQuery(
     ["get_recommendations", slug],

@@ -24,6 +24,8 @@ import { routes } from "../../utils/Routes.js";
 import dynamic from "next/dynamic";
 import { useStore } from "../../Store/StoreProvider.js";
 import LinkText from "../../common/LinkText.js";
+import axios from "axios";
+import { apiHome } from "../../utils/siteName.js";
 const ChaptersModal = dynamic(() => import("../../common/ChaptersModal"));
 function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
   const [goChapter, setGoChapter] = useState(null);
@@ -34,6 +36,7 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
   const [descending, setDescending] = useState(false);
   const [chapters, setChapters] = useState();
   const [lastRead, setLastRead] = useState(lastReadIndex);
+  const [reportButton, setReportButton] = useState(false);
 
   const { isLoading, error, data, refetch } = useChapters(novelParent);
   const router = useRouter();
@@ -81,6 +84,25 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
     } else {
       router.push(`/chapter/${novelParent}-${chapToGo}`);
     }
+  };
+  const requestChapters = () => {
+    const notifId = notifications.showNotification({
+      title: `Send the request`,
+      message: `Thanks for recommending the novel to be added. I'll take a look soon and add if possible. Try reading one of the novels in recommendations below in the meantime`,
+      autoClose: true,
+    });
+    const details = {
+      title: "Add Novel Request",
+      description: `Add this novel https://www.wuxiaworld.eu${routes.novel}/${novelParent}`,
+      chapter: null,
+      reported_by: null,
+    };
+    axios
+      .post(`${apiHome}/report/`, details)
+      .then((response) => {
+        setReportButton(true);
+      })
+      .catch((error) => error);
   };
   const chapterBookmark = (chapSlug) => {
     const notifId = notifications.showNotification({
@@ -167,7 +189,7 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
               </>
             );
           })}
-        {chapters
+        {chapters?.length > 0
           ? chapters?.slice((page - 1) * 10, page * 10).map((chapter) => {
               return (
                 <div key={chapter.novSlugChapSlug}>
@@ -237,14 +259,31 @@ function ChapterBox({ lastReadIndex, novelParent, desktop, bookmarkData }) {
               );
             })
           : !isLoading && (
-              <Center>
-                <Title order={4}>
-                  <Center>No Chapters At The Moment. </Center>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <br />
-                  Please Comment In Suggestions If You Want This Novel To Be
-                  Added
-                </Title>
-              </Center>
+                  <Title order={4}>No Chapters At The Moment.</Title>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Button
+                    onClick={requestChapters}
+                    disabled={reportButton}
+                    sx={{ marginBottom: "40px", marginTop: "40px" }}
+                  >
+                    Request Chapters
+                  </Button>
+                </div>
+              </div>
             )}
         <Center>
           <Pagination

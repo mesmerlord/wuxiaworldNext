@@ -56,7 +56,6 @@ const MobileDetail = ({
                     )}?tr=w-150`) ||
                   ""
                 }
-                src={novelData?.imageThumb}
                 alt={novelData?.name}
                 width={"150px"}
                 height={"100%"}

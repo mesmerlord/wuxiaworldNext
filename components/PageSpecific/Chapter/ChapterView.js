@@ -38,7 +38,7 @@ const ChapterView = ({ chapterSlug }) => {
   const changeSettings = useStore((state) => state.changeSettings);
   const fontSize = useStore((state) => state.fontSize);
   const phone = useMediaQuery("(max-width: 1024px)");
-  const { data } = useChapter(chapterSlug);
+  const { data } = useChapter(chapterSlug, enabled = Boolean(chapterSlug));
   // const [reportComment, setReportComment] = useState("");
   const notifications = useNotifications();
   const [sentReport, setSentReport] = useState(false);

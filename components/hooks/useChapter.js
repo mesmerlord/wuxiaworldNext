@@ -26,7 +26,8 @@ const useChapter = (chapterSlug) => {
     chapterFetch,
     {
       refetchOnWindowFocus: false,
-      staleTime: 100000,
+      staleTime: Infinity,
+      ...arguments
     }
   );
 };

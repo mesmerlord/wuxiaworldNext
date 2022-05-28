@@ -19,7 +19,7 @@ const chapterFetch = ({ queryKey }) => {
   return response;
 };
 
-const useChapter = (chapterSlug) => {
+const useChapter = (chapterSlug, enabled = true) => {
   return useQuery(
     ["chapterFetch", chapterSlug],
 
@@ -27,7 +27,7 @@ const useChapter = (chapterSlug) => {
     {
       refetchOnWindowFocus: false,
       staleTime: Infinity,
-      ...arguments
+      enabled = enabled
     }
   );
 };

@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 import { useRouter } from "next/router";
 import Loading from "../components/common/Loading";
 import ReactGA from "react-ga4";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 
 const App = (props: AppProps) => {
   const {
@@ -66,7 +66,7 @@ const App = (props: AppProps) => {
   }, [router.events]);
 
   return (
-    <SessionProvider session={session}>
+    // <SessionProvider session={session}>
       <StoreProvider store={store}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
@@ -83,7 +83,7 @@ const App = (props: AppProps) => {
           </Hydrate>
         </QueryClientProvider>
       </StoreProvider>
-    </SessionProvider>
+    // </SessionProvider>
   );
 };
 export default App;

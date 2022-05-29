@@ -10,6 +10,7 @@ const NewNovelSection = ({ novelList, headingText = "Browse Novels" }) => {
           <NewBookCard
             bookName={novel.name}
             imageLink={
+              novel?.image ?
               mobile
                 ? `${novel?.image?.replace(
                     process.env.REACT_APP_SPACES_LINK,
@@ -19,6 +20,7 @@ const NewNovelSection = ({ novelList, headingText = "Browse Novels" }) => {
                     process.env.REACT_APP_SPACES_LINK,
                     process.env.REACT_APP_IMAGE_CDN
                   )}?tr=w-500`
+              :""
             }
             badgeText={"New"}
             slug={novel.slug}

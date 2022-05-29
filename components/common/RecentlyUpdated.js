@@ -63,10 +63,11 @@ const RecentlyUpdated = () => {
                 <TableCell component="th" scope="row">
                   <Image
                     radius="md"
-                    src={`${chapter?.novel_thumb?.replace(
+                    src={chapter?.novel_thumb ? `${chapter?.novel_thumb?.replace(
                       "https://cdn.wuxianovels.co/",
                       "https://ik.imagekit.io/opyvhypp7cj/"
-                    )}?tr=w-80`}
+                    )}?tr=w-80`
+                  : ""}
                     alt={chapter.novel_name}
                     width={50}
                     height={80}

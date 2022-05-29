@@ -44,6 +44,7 @@ const Recommendations = ({ novel_slug, loadingCount }) => {
               <SmallBookCard
                 bookName={novel.name}
                 imageLink={
+                  novel?.image ?
                   mobile
                     ? `${novel?.image?.replace(
                         "https://cdn.wuxianovels.co/",
@@ -53,6 +54,7 @@ const Recommendations = ({ novel_slug, loadingCount }) => {
                         "https://cdn.wuxianovels.co/",
                         "https://ik.imagekit.io/opyvhypp7cj/"
                       )}?tr=w-500`
+                  : ""
                 }
                 badgeText={"New"}
                 slug={novel.slug}

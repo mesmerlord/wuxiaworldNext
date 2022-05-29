@@ -44,6 +44,7 @@ const Recommendations = ({ novel_slug }) => {
               <SmallBookCard
                 bookName={novel.name}
                 imageLink={
+                  novel?.image ?
                   mobile
                     ? `${novel?.image?.replace(
                         process.env.NEXT_PUBLIC_SPACES_LINK,
@@ -53,6 +54,7 @@ const Recommendations = ({ novel_slug }) => {
                         process.env.NEXT_PUBLIC_SPACES_LINK,
                         process.env.NEXT_PUBLIC_IMAGE_CDN
                       )}?tr=w-500`
+                  : null
                 }
                 badgeText={"New"}
                 slug={novel.slug}

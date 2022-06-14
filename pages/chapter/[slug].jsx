@@ -75,7 +75,6 @@ export async function getStaticPaths() {
     };
     return value;
   });
-  console.log(flattened_array);
 
   return {
     paths: [...flattened_array],

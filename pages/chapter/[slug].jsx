@@ -10,6 +10,7 @@ import ChapterView from "../../components/PageSpecific/Chapter/ChapterView";
 import { dehydrate, QueryClient } from "react-query";
 import { routes } from "../../components/utils/Routes.js";
 import Seo from "../../components/common/Seo";
+import axios from "axios";
 
 // const ChapterView = dynamic(
 //   () => import("../../components/PageSpecific/Chapter/ChapterView"),

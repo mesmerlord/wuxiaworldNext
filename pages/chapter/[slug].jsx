@@ -43,7 +43,7 @@ export async function getStaticPaths() {
   });
   const chapter_urls = urls.map((novel) => {
     const chapter_fetch = (id) => {
-      return axios
+      return await axios
         .get(`${apiHome}/chapters/${id}/`, {})
         .then((response) => {
           const res = response.data;

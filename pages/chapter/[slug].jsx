@@ -53,7 +53,6 @@ export async function getStaticPaths() {
     };
 
     const fetched_chapters = chapter_fetch(novel.slug);
-    console.log(fetched_chapters.slice(1));
     const first_chaps_to_download = fetched_chapters.slice(0, 50);
     const second_chaps_to_download = fetched_chapters.slice(-50);
 

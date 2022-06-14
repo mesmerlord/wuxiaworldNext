@@ -64,7 +64,7 @@ export async function getStaticPaths() {
 
   const flattened_array = [].concat.apply([], chapter_urls).map((chapter) => {
     return {
-      params: { slug: item.slug },
+      params: { slug: chapter.slug },
     };
   });
 

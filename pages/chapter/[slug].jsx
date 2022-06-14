@@ -42,7 +42,7 @@ export async function getStaticPaths() {
     return value;
   });
   const chapter_urls = urls.map((novel) => {
-    const chapter_fetch = (id) => {
+    const chapter_fetch = async (id) => {
       return await axios
         .get(`${apiHome}/chapters/${id}/`, {})
         .then((response) => {

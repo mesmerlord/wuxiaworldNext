@@ -41,7 +41,7 @@ export async function getStaticPaths() {
     const value = { slug: item.slug };
     return value;
   });
-  const chapter_urls = urls.map((novel) => {
+  const chapter_urls = urls.map(async (novel) => {
     const chapter_fetch = async (id) => {
       return await axios
         .get(`${apiHome}/chapters/${id}/`, {})
@@ -52,7 +52,7 @@ export async function getStaticPaths() {
         .catch((error) => console.log(error));
     };
 
-    const fetched_chapters = chapter_fetch(novel.slug);
+    const fetched_chapters = await chapter_fetch(novel.slug);
     console.log(fetched_chapters);
     const first_chaps_to_download = fetched_chapters.slice(0, 50);
     const second_chaps_to_download = fetched_chapters.slice(-50);

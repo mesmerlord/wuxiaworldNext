@@ -41,14 +41,14 @@ export async function getStaticPaths() {
     const value = { slug: item.slug };
     return value;
   });
-  const chapter_urls = urls.map( (novel) => {
+  const chapter_urls = urls.map(async (novel) => {
     const fetched_chapters = await axios
-    .get(`${apiHome}/chapters/${id}/`, {})
-    .then((response) => {
-      const res = response.data;
-      return res;
-    })
-    .catch((error) => console.log(error));
+      .get(`${apiHome}/chapters/${id}/`, {})
+      .then((response) => {
+        const res = response.data;
+        return res;
+      })
+      .catch((error) => console.log(error));
 
     console.log(fetched_chapters);
     const first_chaps_to_download = fetched_chapters.slice(0, 50);

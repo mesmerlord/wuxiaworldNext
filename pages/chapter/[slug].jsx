@@ -62,15 +62,14 @@ export async function getStaticPaths() {
     return paths_to_return;
   });
 
-  flattened_array = [].concat.apply([], chapter_urls);
-  flattened_array.map((chapter) => {
+  const flattened_array = [].concat.apply([], chapter_urls).map((chapter) => {
     return {
       params: { slug: item.slug },
     };
   });
 
   return {
-    paths: [...urls],
+    paths: [...flattened_array],
     fallback: "blocking", // false or 'blocking'
   };
 }

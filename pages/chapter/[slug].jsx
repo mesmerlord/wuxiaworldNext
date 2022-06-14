@@ -40,6 +40,7 @@ export async function getStaticPaths() {
     const value = { slug: item.slug };
     return value;
   });
+  console.log(urls);
   const chapter_urls = urls.map(async (url) => {
     const chapter_fetch = async (id) => {
       return await axios
@@ -59,6 +60,7 @@ export async function getStaticPaths() {
       [],
       [first_chaps_to_download, second_chaps_to_download]
     );
+    console.log(all_chaps);
 
     const paths_to_return = all_chaps.map((chap) => {
       const value = { slug: chap.novSlugChapSlug };

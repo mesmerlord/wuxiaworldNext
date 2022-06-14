@@ -11,6 +11,7 @@ import { dehydrate, QueryClient } from "react-query";
 import { routes } from "../../components/utils/Routes.js";
 import Seo from "../../components/common/Seo";
 import axios from "axios";
+import { apiHome } from "../../components/utils/siteName";
 
 // const ChapterView = dynamic(
 //   () => import("../../components/PageSpecific/Chapter/ChapterView"),

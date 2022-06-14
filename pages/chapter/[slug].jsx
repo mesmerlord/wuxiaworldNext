@@ -61,7 +61,8 @@ export async function getStaticPaths() {
     );
 
     const paths_to_return = all_chaps.map((chap) => {
-      return { slug: chap.novSlugChapSlug };
+      const value = { slug: chap.novSlugChapSlug };
+      return value;
     });
     return paths_to_return;
   });
@@ -72,6 +73,7 @@ export async function getStaticPaths() {
     };
     return value;
   });
+  console.log(flattened_array);
 
   return {
     paths: [...flattened_array],

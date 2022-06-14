@@ -31,43 +31,23 @@ export async function getStaticPaths() {
   const headers = {
     Authorization: `Token ${process.env.ADMIN_TOKEN}`,
   };
-  const response = await axios.get(
-    "https://wuxia.click/api/admin-novels/?order=-total_views",
-    {
-      headers,
-    }
-  );
-  const urls = response.data.slice(0, 50).map((item) => {
-    const value = { slug: item.slug };
+
+  const fetched_chapters = await axios
+    .get(`${apiHome}/chapters/library-of-heavens-path}/`, {})
+    .then((response) => {
+      const res = response.data;
+      return res;
+    })
+    .catch((error) => console.log(error));
+
+  const first_chaps_to_download = fetched_chapters.slice(0, 1000);
+
+  const paths_to_return = all_chaps.map((chap) => {
+    const value = { slug: chap.novSlugChapSlug };
     return value;
   });
-  const chapter_urls = urls.map(async (novel) => {
-    const fetched_chapters = await axios
-      .get(`${apiHome}/chapters/${id}/`, {})
-      .then((response) => {
-        const res = response.data;
-        return res;
-      })
-      .catch((error) => console.log(error));
 
-    console.log(fetched_chapters);
-    const first_chaps_to_download = fetched_chapters.slice(0, 50);
-    const second_chaps_to_download = fetched_chapters.slice(-50);
-
-    const all_chaps = [].concat.apply(
-      [],
-      [first_chaps_to_download, second_chaps_to_download]
-    );
-    console.log(all_chaps);
-
-    const paths_to_return = all_chaps.map((chap) => {
-      const value = { slug: chap.novSlugChapSlug };
-      return value;
-    });
-    return paths_to_return;
-  });
-
-  const flattened_array = [].concat.apply([], chapter_urls).map((chapter) => {
+  const flattened_array = paths_to_return.map((chapter) => {
     const value = {
       params: { slug: chapter.slug },
     };

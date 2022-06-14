@@ -74,7 +74,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(["chapterFetch", slug], chapterFetch, {

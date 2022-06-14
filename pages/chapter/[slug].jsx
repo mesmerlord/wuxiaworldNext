@@ -40,7 +40,7 @@ export async function getStaticPaths() {
     const value = { slug: item.slug };
     return value;
   });
-  const chapter_urls = await urls.map(async (novel) => {
+  const chapter_urls =  urls.map( (novel) => {
     const chapter_fetch = (id) => {
       return axios
         .get(`${apiHome}/chapters/${id}/`, {})

@@ -51,21 +51,26 @@ export async function getStaticPaths() {
         .catch((error) => error);
     };
 
-    fetched_chapters = await chapter_fetch(url);
-    first_chaps_to_download = fetched_chapters.slice(0, 50);
-    second_chaps_to_download = fetched_chapters.slice(-50);
+    const fetched_chapters = await chapter_fetch(url);
+    const first_chaps_to_download = fetched_chapters.slice(0, 50);
+    const second_chaps_to_download = fetched_chapters.slice(-50);
 
-    all_chaps = [...first_chaps_to_download, ...second_chaps_to_download];
-    paths_to_return = all_chaps.map((chap) => {
+    const all_chaps = [].concat.apply(
+      [],
+      [first_chaps_to_download, second_chaps_to_download]
+    );
+
+    const paths_to_return = all_chaps.map((chap) => {
       return { slug: chap.novSlugChapSlug };
     });
     return paths_to_return;
   });
 
   const flattened_array = [].concat.apply([], chapter_urls).map((chapter) => {
-    return {
+    const value = {
       params: { slug: chapter.slug },
     };
+    return value;
   });
 
   return {

@@ -48,8 +48,9 @@ export async function getStaticPaths() {
           const res = response.data;
           return res;
         })
-        .catch((error) => error);
+        .catch((error) => console.log(error));
     };
+    console.log(novel);
 
     const fetched_chapters = await chapter_fetch(novel.slug);
     console.log(fetched_chapters);

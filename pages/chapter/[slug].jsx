@@ -24,6 +24,56 @@ const Recommendations = dynamic(
     ssr: false,
   }
 );
+
+export async function getStaticPaths() {
+  const headers = {
+    Authorization: `Token ${process.env.ADMIN_TOKEN}`,
+  };
+  const response = await axios.get(
+    "https://wuxia.click/api/admin-novels/?order=-total_views",
+    {
+      headers,
+    }
+  );
+  const urls = response.data.slice(0, 50).map((item) => {
+    const value = { slug: item.slug };
+    return value;
+  });
+  const chapter_urls = urls.map(async (url) => {
+    const chapter_fetch = async (id) => {
+      return await axios
+        .get(`${apiHome}/chapters/${id}/`, {})
+        .then((response) => {
+          const res = response.data;
+          return res;
+        })
+        .catch((error) => error);
+    };
+
+    fetched_chapters = await chapter_fetch(url);
+    first_chaps_to_download = fetched_chapters.slice(0, 50);
+    second_chaps_to_download = fetched_chapters.slice(-50);
+
+    all_chaps = [...first_chaps_to_download, ...second_chaps_to_download];
+    paths_to_return = all_chaps.map((chap) => {
+      return { slug: chap.novSlugChapSlug };
+    });
+    return paths_to_return;
+  });
+
+  flattened_array = [].concat.apply([], chapter_urls);
+  flattened_array.map((chapter) => {
+    return {
+      params: { slug: item.slug },
+    };
+  });
+
+  return {
+    paths: [...urls],
+    fallback: "blocking", // false or 'blocking'
+  };
+}
+
 export async function getServerSideProps(context) {
   const { slug } = context.params;
   const queryClient = new QueryClient();
